@@ -52,10 +52,10 @@ class Bottle: #F: blueprint for creating objects. 'Bottle' is object
 
     def __str__(self): #F: __str__ (method) returns string representation of the object (self)
         # type: () -> str
-        res: str = ""  # initial value (empty string)
-        for i in range(self.BOTTLE_CAPACITY - 1, -1, -1): #F: binding bottle to BOTTLE_CAPACITY #Range(1, -1, -1) -> [1, 0]
-            if i >= len(self.__water_levels):
-                res += "|        |\n"
+        res: str = ""  #V: initial value (empty string). Initiating string that will 'draw' the bottle
+        for i in range(self.BOTTLE_CAPACITY - 1, -1, -1): #F: binding bottle to BOTTLE_CAPACITY #Range(1, -1, -1) -> [1, 0] 
+            if i >= len(self.__water_levels): #V: for every number in the range of BOTTLE CAPACITY (i.e. range(0,5)), if this item (number) is greater or equal to the length of the list, the string is reset to 'empty walls of the tube' 
+                res += "|        |\n" 
             else:
                 curr_water_level: Water = self.__water_levels[i]
                 if len(str(curr_water_level)) == 3:
@@ -67,7 +67,7 @@ class Bottle: #F: blueprint for creating objects. 'Bottle' is object
                 else:
                     res += "| " + str(curr_water_level) + " |\n"
 
-        return res
+        return res #output will be a visual representation of the water tube
 
     def add_water_level(self, water):
         # type: (Water) -> bool
@@ -145,23 +145,27 @@ def main():
     :return: None
     """
 
-    print("Welcome to 'Water Sort Puzzle' by 'GlobalCreativeCommunityFounder'.") #A: Prints welcome game on the screen
-    print("In this game, you are required to make sure that each water bottle only contains one colour of water.")
-    print("Enter 'Y' for yes.")
-    print("Enter anything else for no.")
-    level: int = 1  # initial value #A: defines variable "level" (which will be an int) as initially equal to 1
-    continue_playing: str = input("Do you want to continue playing 'Water Sort Puzzle'? ") #E: Defines a variable asking user input (string)
+    print("Welcome to 'Water Sort Puzzle' by 'GlobalCreativeCommunityFounder'.") #A: Prints welcome on the screen
+    print("In this game, you are required to make sure that each water bottle only contains one colour of water.") #A: Prints instructions on the screen
+    print("Enter 'Y' for yes.") #A: Prints instructions on the screen 
+    print("Enter anything else for no.")  #A: Prints instructions on the screen
+    level: int = 1 #A: defines variable "level" (int) as initially equal to 1
+    continue_playing: str = input("Do you want to continue playing 'Water Sort Puzzle'? ") #E: Defines a variable "continue_playing" for users input (string)
     while continue_playing == "Y": #A: while the user's answer is yes/"Y" (they want to continue playing), the game code below will run
-        bottles: list = []  # initial value #E: instantiate bottles as an empty list
-        number_of_bottles: int = 5 + (level // 5) #A: defines a variable for the number of bottles that will be an int and is equal to 5 #V:at levels 1&2 there'll be 5 bottles
-        number_of_empty_bottles: int = number_of_bottles // 5
-        possible_colours: list = Water.POSSIBLE_COLOURS if number_of_bottles >= 10 else Water.POSSIBLE_COLOURS[0:4]
-        for i in range(number_of_empty_bottles):
-            bottles.append(Bottle([]))
+        bottles: list = []  #E: instantiate "bottles" as an empty list
+        number_of_bottles: int = 5 + (level // 5) #A: defines a variable for the number of bottles (int) and is equal to 5 plus integer division of the level number by 5 
+                                                  #V: at levels 1&2 there'll be 5 bottles
+        number_of_empty_bottles: int = number_of_bottles // 5 #A: defines a variable for the number of empty bottles (int) and is equal to the number of bottles integer divided by 5
+                                                              #V: at 5 total bottles, there'll only be one empty
+        possible_colours: list = Water.POSSIBLE_COLOURS if number_of_bottles >= 10 else Water.POSSIBLE_COLOURS[0:4] #A: creates list of possible colours:
+                                                                                                                    #all of original possible colours if there are 10+ bottles
+                                                                                                                    #object 1, 2, 3, 4 from the original list of possible colours if not
+        for i in range(number_of_empty_bottles): #V: loop will run for every empty bottle. 1 empty bottle -> range = [0]
+            bottles.append(Bottle([])) #A: append the empty list binded with Bottle during class Bottle to empty list bottles defined earlier in main?????
 
-        for i in range(number_of_bottles - number_of_empty_bottles):
-            water_levels: list = []  # initial value
-            for j in range(4):
+        for i in range(number_of_bottles - number_of_empty_bottles): #V: loop will run for every filled bottle
+            water_levels: list = []  #A: defines a empty list "water_levels"
+            for j in range(4): 
                 water_levels.append(Water(possible_colours[random.randint(0, len(possible_colours) - 1)]))
 
             bottles.append(Bottle(water_levels))

@@ -165,7 +165,7 @@ def main():
 
         for i in range(number_of_bottles - number_of_empty_bottles): #V: loop will run for every filled bottle
             water_levels: list = []  #A: defines a empty list "water_levels"
-            for j in range(4): 
+            for j in range(4): #A: 
                 water_levels.append(Water(possible_colours[random.randint(0, len(possible_colours) - 1)]))
 
             bottles.append(Bottle(water_levels))

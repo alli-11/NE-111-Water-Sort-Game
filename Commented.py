@@ -13,7 +13,7 @@ import random #E&A: module that gives access to  functions that manipulate rando
 # Creating necessary functions to be used throughout the game.
 
 
-def clear(): #needs clarification -> test for a specific system version -> being able to run in different operating systems
+def clear(): #V&A: test for a specific system version -> being able to run in different operating systems
     # type: () -> None
     if sys.platform.startswith('win'):
         os.system('cls')  # For Windows System
@@ -36,49 +36,52 @@ def all_bottles_sorted(bottles: list) -> bool: #All: -> bool shows what the func
 # Creating necessary classes
 
 
-class Bottle: #F: blueprint for creating objects. 'Bottle' is object
+class Bottle: #A: 'Bottle' is the name of the class
     """
     This class contains attributes of a water bottle.
     """
 
     BOTTLE_CAPACITY: int = 5 #constant
 
-    def __init__(self, water_levels=None): #__init__ (method) is a function called when object created from class - initializes object's attributes
+    def __init__(self, water_levels=None): #V&A: __init__ (method) - initializes object's attributes
         #F: None is default if water_levels not defined by user
         # type: (list) -> None
         if water_levels is None: #V: avoid error, list will always be given
-            water_levels =  [] # in case no list is given
-        self.__water_levels: list = water_levels #V&F: binding the attribute 'water_levels' to object Bottle (instance)
+            water_levels =  [] #V: in case no list is given - later filled with COLORS
+        self.__water_levels: list = water_levels #V&A: bind object (self) to water_levels so that every instance (object created) reassigns water_levels
 
-    def __str__(self): #F: __str__ (method) returns string representation of the object (self)
+    def __str__(self): #F: __str__ (method) - actuator of the class (it actually prints/performs what need)
         # type: () -> str
         res: str = ""  #V: initial value (empty string). Initiating string that will 'draw' the bottle
-        for i in range(self.BOTTLE_CAPACITY - 1, -1, -1): #F: binding bottle to BOTTLE_CAPACITY #Range(1, -1, -1) -> [1, 0] 
-            if i >= len(self.__water_levels): #V: for every number in the range of BOTTLE CAPACITY (i.e. range(0,5)), if this item (number) is greater or equal to the length of the list, the string is reset to 'empty walls of the tube' 
+            #THIS WILL BUILD ONE SINGLE TUBE
+        for i in range(self.BOTTLE_CAPACITY - 1, -1, -1): #F: binding object to BOTTLE_CAPACITY #Range(4, -1, -1) -> [4, 0] 
+            if i >= len(self.__water_levels): #V: for every level of the actual bottle (4, 3, 2, 1, 0), if number is greater or equal to the length of the list, the string is reset to 'empty walls of the tube' 
+                #V: if the bottle capacity is greater than the water level --> for empty lists(water_levels), loop will run 5 times (create a tube with 5 lines of walls)
                 res += "|        |\n" 
-            else:
-                curr_water_level: Water = self.__water_levels[i]
-                if len(str(curr_water_level)) == 3:
+            else: #V: in case self's list is not empty
+                curr_water_level: Water = self.__water_levels[i] #V: indexes 0, 1, 2, 3, 4 of list of water levels --> meant to align empty and filled tube wall sections
+                if len(str(curr_water_level)) == 3: #V: for 'RED'
                     res += "|   " + str(curr_water_level) + "  |\n"
-                elif len(str(curr_water_level)) == 4:
+                elif len(str(curr_water_level)) == 4: #V: for 'BLUE'
                     res += "|  " + str(curr_water_level) + "  |\n"
-                elif len(str(curr_water_level)) == 5:
+                elif len(str(curr_water_level)) == 5: #V: "GREEN"
                     res += "|  " + str(curr_water_level) + " |\n"
-                else:
+                else: #V: "ORANGE", "PURPLE", "YELLOW
                     res += "| " + str(curr_water_level) + " |\n"
 
         return res #output will be a visual representation of the water tube
 
-    def add_water_level(self, water):
+    def add_water_level(self, water): #A: checks whether it is possible to add an additional color (if bottle is not full)
+        #A&V: through logic we think 'water' must be a color
         # type: (Water) -> bool
-        if len(self.__water_levels) < self.BOTTLE_CAPACITY:
+        if len(self.__water_levels) < self.BOTTLE_CAPACITY: #A&V: at lower levels, BOTTLE CAPACITY = 5 --> "when the water level (i.e. colors) is less than full bottle capacity)
             self.__water_levels.append(water)
             return True
         return False
 
     def pour_water(self, other_bottle):
         # type: (Bottle) -> bool
-        self_last: Water = self.get_last_water_level()
+        self_last: Water = self.get_last_water_level() #
         other_last: Water = other_bottle.get_last_water_level()
         if len(other_bottle.get_water_levels()) >= self.BOTTLE_CAPACITY:
             return False
@@ -90,14 +93,14 @@ class Bottle: #F: blueprint for creating objects. 'Bottle' is object
 
     def get_last_water_level(self):
         # type: () -> Water or None
-        if len(self.__water_levels) > 0:
-            return self.__water_levels[len(self.__water_levels) - 1]
+        if len(self.__water_levels) > 0: #A&V: if there are colors in list (bottle is not empty)
+            return self.__water_levels[len(self.__water_levels) - 1] #A&V: call last item of list
         else:
             return None
 
     def sorted(self):
         # type: () -> bool
-        if len(self.__water_levels) == 0:
+        if len(self.__water_levels) == 0: #A&V: if bottle is empty = automatically sorted
             return True
         else:
             curr_colour: str = self.__water_levels[0].colour
@@ -121,15 +124,15 @@ class Water:
     This class contains attributes of water
     """
 
-    POSSIBLE_COLOURS: list = ["BLUE", "RED", "ORANGE", "GREEN", "PURPLE", "YELLOW"]
+    POSSIBLE_COLOURS: list = ["BLUE", "RED", "ORANGE", "GREEN", "PURPLE", "YELLOW"] #A: constant list
 
-    def __init__(self, colour):
+    def __init__(self, colour): #A&V: initializing, attributing color to self
         # type: (str) -> None
-        self.colour: str = colour if colour in self.POSSIBLE_COLOURS else self.POSSIBLE_COLOURS[0]
+        self.colour: str = colour if colour in self.POSSIBLE_COLOURS else self.POSSIBLE_COLOURS[0] #A&V: assign 1 color to object. Deafult is blue
 
-    def __str__(self):
+    def __str__(self): #A&V: generates user-readable/usable output (from __init__)
         # type: () -> str
-        return str(self.colour)
+        return str(self.colour) #color from __init__
 
     def clone(self):
         # type: () -> Water
@@ -147,7 +150,7 @@ def main():
 
     print("Welcome to 'Water Sort Puzzle' by 'GlobalCreativeCommunityFounder'.") #A: Prints welcome on the screen
     print("In this game, you are required to make sure that each water bottle only contains one colour of water.") #A: Prints instructions on the screen
-    print("Enter 'Y' for yes.") #A: Prints instructions on the screen 
+    print("Enter 'Y' for yes.") #A: Prints instructions on the screen #V: asks for input
     print("Enter anything else for no.")  #A: Prints instructions on the screen
     level: int = 1 #A: defines variable "level" (int) as initially equal to 1
     continue_playing: str = input("Do you want to continue playing 'Water Sort Puzzle'? ") #E: Defines a variable "continue_playing" for users input (string)
@@ -192,7 +195,7 @@ def main():
 
             bottle_from: Bottle = bottles[bottle_from_index - 1]
             bottle_to: Bottle = bottles[bottle_to_index - 1]
-            bottle_from.pour_water(bottle_to)
+            bottle_from.pour_water(bottle_to) #A: using Bottle(class) method
 
         print("Enter 'Y' for yes.")
         print("Enter anything else for no.")

@@ -23,14 +23,14 @@ def clear(): #V&A: test for a specific system version -> being able to run in di
 
 def all_bottles_sorted(bottles: list) -> bool: #All: -> bool shows what the function will return but does not force function to return bool (solely for readability)
     # All: variable: list - indicates that the input will be in list form
-    if len(bottles) == 0:
+    if len(bottles) == 0: #A: if there are no bottles, all bottles are sorted
         return True
     else:
         for bottle in bottles:
-            if not bottle.sorted(): #in lexicographic order
+            if not bottle.sorted(): #from sorted() method in Bottles. Check if all colors in all bottles are sorted
                 return False
 
-        return True #prediction: return False for unsorted colors in every bottle in 'bottles' then return True for the game to continue
+        return True #prediction: return False for unsorted bottles in 'bottles' then return True if all bottles are sorted
 
 
 # Creating necessary classes
@@ -164,44 +164,44 @@ def main():
                                                                                                                     #all of original possible colours if there are 10+ bottles
                                                                                                                     #object 1, 2, 3, 4 from the original list of possible colours if not
         for i in range(number_of_empty_bottles): #V: loop will run for every empty bottle. 1 empty bottle -> range = [0]
-            bottles.append(Bottle([])) #A: ?????
+            bottles.append(Bottle([])) #A&V: creating empty bottles/empty lists (level 1 will have 1 empty bottle)
 
         for i in range(number_of_bottles - number_of_empty_bottles): #V: loop will run for every filled bottle
             water_levels: list = []  #A: defines a empty list "water_levels"
             for j in range(4): #A: for 0, 1, 2, 3 (4 times total)
                 water_levels.append(Water(possible_colours[random.randint(0, len(possible_colours) - 1)])) #A: generates a random integer to be used as the index for the constant list of possible colors defined in Water then appends that entry (color) to the list water_levels
 
-            bottles.append(Bottle(water_levels)) #A&V: append the ....???
+            bottles.append(Bottle(water_levels)) #A&V: append the list created above to the object bottles + applying it to the class Bottle
 
-        while not all_bottles_sorted(bottles):
+        while not all_bottles_sorted(bottles): #A&V: while the user hasn't sorted like colors into one tube
             clear()
 
             print("You are now at level " + str(level))
-            print("Current representation of each bottle is as below.\n")
-            for bottle in bottles:
-                print(str(bottle) + "\n")
+            print("Current representation of each bottle is as below.\n") #A&V: prints both statements before the game starts
+            for bottle in bottles: #V: for every item (bottle, which contain colors) in list of bottles created above
+                print(str(bottle) + "\n") #A&V: actually displays bottles built in Bottle
 
-            bottle_from_index: int = int(input("Please enter index of water bottle you want to pour bottle from "
-                                               "(1 - " + str(len(bottles)) + "): "))
-            bottle_to_index: int = int(input("Please enter index of water bottle you want to pour bottle to "
+            bottle_from_index: int = int(input("Please enter index of water bottle you want to pour bottle from " #A&V: asks user to pick a bottle (take color out of it)
+                                               "(1 - " + str(len(bottles)) + "): ")) #REMINDER: ADD INTEGER CHECK
+            bottle_to_index: int = int(input("Please enter index of water bottle you want to pour bottle to " #A&V: asks user for recipient bottle (put color into it)
                                              "(1 - " + str(len(bottles)) + "): "))
             while bottle_from_index < 1 or bottle_from_index > len(bottles) or bottle_to_index < 1 or \
                     bottle_to_index > len(bottles) or bottle_from_index == bottle_to_index:
-                print("Invalid input! A different input is expected!")
+                print("Invalid input! A different input is expected!") #A&V: checks for numerically invalid inputs (not TypeError inputs)
                 bottle_from_index = int(input("Please enter index of water bottle you want to pour bottle from "
-                                              "(1 - " + str(len(bottles)) + "): "))
+                                              "(1 - " + str(len(bottles)) + "): ")) #A&V: restates request for input (in case previous one was invalid)
                 bottle_to_index = int(input("Please enter index of water bottle you want to pour bottle to "
                                             "(1 - " + str(len(bottles)) + "): "))
 
-            bottle_from: Bottle = bottles[bottle_from_index - 1]
-            bottle_to: Bottle = bottles[bottle_to_index - 1]
-            bottle_from.pour_water(bottle_to) #A: using Bottle(class) method
+            bottle_from: Bottle = bottles[bottle_from_index - 1] #A&V: new variable refering to class Bottle --> picks bottle (from bottles) chosen by user with corresponding index 
+            bottle_to: Bottle = bottles[bottle_to_index - 1] #A&V: picks bottle (from bottles) to receive color --> from index chosen by user
+            bottle_from.pour_water(bottle_to) #A&V: applies method pour_water (from Bottle) with bottle_from as self and bottle_to as other_bottle
 
-        print("Enter 'Y' for yes.")
+        print("Enter 'Y' for yes.") #A&V: printed after 'do you want to continue playing'
         print("Enter anything else for no.")
-        continue_playing = input("Do you want to continue playing 'Water Sort Puzzle'? ")
-    sys.exit()
+        continue_playing = input("Do you want to continue playing 'Water Sort Puzzle'? ") #A: once bottles are sorted, asks if while loop should continue
+    sys.exit() #A&V: if user's input is anything other than "Y".
 
 
-if __name__ == '__main__':
+if __name__ == '__main__': #A: run only as script
     main()

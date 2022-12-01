@@ -85,10 +85,10 @@ class Bottle: #A: 'Bottle' is the name of the class
         other_last: Water = other_bottle.get_last_water_level() #A&V: retrieve top item in another bottle (called by method) #V: applies list of colors as method on other_bottle
         if len(other_bottle.get_water_levels()) >= self.BOTTLE_CAPACITY: #A&V: length of list of colors in other bottle exceeds or equals Bottle Capacity return False 
             return False
-        if other_last is None or self_last.colour == other_last.colour or len(other_bottle.__water_levels) == 0:
-            self.__water_levels.remove(self_last)
-            other_bottle.add_water_level(self_last)
-            return True
+        if other_last is None or self_last.colour == other_last.colour or len(other_bottle.__water_levels) == 0: #A&V: If the bottle is empty (written twice) or the top colors of both bottles are the same
+            self.__water_levels.remove(self_last) #V: Removes the last item (top color) from the list of the current bottle
+            other_bottle.add_water_level(self_last) #A: Adds the last item (top color) from the list of the current bottle to the end of the other bottle list (top of bottle)
+            return True #V: so that the game will continue running
         return False
 
     def get_last_water_level(self):

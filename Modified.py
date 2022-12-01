@@ -12,6 +12,13 @@ import random #E&A: module that gives access to  functions that manipulate rando
 
 # Creating necessary functions to be used throughout the game.
 
+def is_int(possible) :
+    try:
+        int(possible)
+    except ValueError:
+        return False
+    else :
+        return True
 
 def clear(): #V&A: test for a specific system version -> being able to run in different operating systems
     # type: () -> None
@@ -154,7 +161,7 @@ def main():
     print("Enter anything else for no.")  #A: Prints instructions on the screen
     level: int = 1 #A: defines variable "level" (int) as initially equal to 1
     continue_playing: str = input("Do you want to continue playing 'Water Sort Puzzle'? ") #E: Defines a variable "continue_playing" for users input (string)
-    while continue_playing == "Y": #A: while the user's answer is yes/"Y" (they want to continue playing), the game code below will run
+    while continue_playing == "Y" or continue_playing == "y": #A: while the user's answer is yes/"Y" (they want to continue playing), the game code below will run
         bottles: list = []  #E: instantiate "bottles" as an empty list
         number_of_bottles: int = 5 + (level // 5) #A: defines a variable for the number of bottles (int) and is equal to 5 plus integer division of the level number by 5 
                                                   #V: at levels 1&2 there'll be 5 bottles
@@ -181,21 +188,38 @@ def main():
             for bottle in bottles: #V: for every item (bottle, which contain colors) in list of bottles created above
                 print(str(bottle) + "\n") #A&V: actually displays bottles built in Bottle
 
-            bottle_from_index: int = int(input("Please enter index of water bottle you want to pour bottle from " #A&V: asks user to pick a bottle (take color out of it)
-                                               "(1 - " + str(len(bottles)) + "): ")) #REMINDER: ADD INTEGER CHECK
-            bottle_to_index: int = int(input("Please enter index of water bottle you want to pour bottle to " #A&V: asks user for recipient bottle (put color into it)
-                                             "(1 - " + str(len(bottles)) + "): "))
-            while bottle_from_index < 1 or bottle_from_index > len(bottles) or bottle_to_index < 1 or \
-                    bottle_to_index > len(bottles) or bottle_from_index == bottle_to_index:
+            bottle_from_index: int = input("Please enter index of water bottle you want to pour bottle from " #A&V: asks user to pick a bottle (take color out of it)
+                                               "(1 - " + str(len(bottles)) + "): ") #REMINDER: ADD INTEGER CHECK
+            bottle_to_index: int = input("Please enter index of water bottle you want to pour bottle to " #A&V: asks user for recipient bottle (put color into it)
+                                             "(1 - " + str(len(bottles)) + "): ")
+            while (is_int(bottle_from_index) == False or is_int(bottle_to_index) == False):
                 print("Invalid input! A different input is expected!") #A&V: checks for numerically invalid inputs (not TypeError inputs)
-                bottle_from_index = int(input("Please enter index of water bottle you want to pour bottle from "
-                                              "(1 - " + str(len(bottles)) + "): ")) #A&V: restates request for input (in case previous one was invalid)
-                bottle_to_index = int(input("Please enter index of water bottle you want to pour bottle to "
-                                            "(1 - " + str(len(bottles)) + "): "))
+                bottle_from_index = input("Please enter index of water bottle you want to pour bottle from "
+                                              "(1 - " + str(len(bottles)) + "): ") #A&V: restates request for input (in case previous one was invalid)
+                bottle_to_index = input("Please enter index of water bottle you want to pour bottle to "
+                                            "(1 - " + str(len(bottles)) + "): ")
+            bottle_from_index = int(bottle_from_index)
+            bottle_to_index = int(bottle_to_index)
+            while bottle_from_index < 1 or bottle_from_index > len(bottles) or bottle_to_index < 1 or bottle_to_index > len(bottles) or bottle_from_index == bottle_to_index:
+                print("Invalid input! A different input is expected!") #A&V: checks for numerically invalid inputs (not TypeError inputs)
+                bottle_from_index = input("Please enter index of water bottle you want to pour bottle from "
+                                              "(1 - " + str(len(bottles)) + "): ") #A&V: restates request for input (in case previous one was invalid)
+                bottle_to_index = input("Please enter index of water bottle you want to pour bottle to "
+                                            "(1 - " + str(len(bottles)) + "): ")
+                while (is_int(bottle_from_index) == False or is_int(bottle_to_index) == False):
+                    print("Invalid input! A different input is expected!") #A&V: checks for numerically invalid inputs (not TypeError inputs)
+                    bottle_from_index = input("Please enter index of water bottle you want to pour bottle from "
+                                                "(1 - " + str(len(bottles)) + "): ") #A&V: restates request for input (in case previous one was invalid)
+                    bottle_to_index = input("Please enter index of water bottle you want to pour bottle to "
+                                                "(1 - " + str(len(bottles)) + "): ")
+                bottle_from_index = int(bottle_from_index)
+                bottle_to_index = int(bottle_to_index)
 
+                
             bottle_from: Bottle = bottles[bottle_from_index - 1] #A&V: new variable refering to class Bottle --> picks bottle (from bottles) chosen by user with corresponding index 
             bottle_to: Bottle = bottles[bottle_to_index - 1] #A&V: picks bottle (from bottles) to receive color --> from index chosen by user
             bottle_from.pour_water(bottle_to) #A&V: applies method pour_water (from Bottle) with bottle_from as self and bottle_to as other_bottle
+
 
         print("Enter 'Y' for yes.") #A&V: printed after 'do you want to continue playing'
         print("Enter anything else for no.")

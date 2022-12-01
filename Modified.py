@@ -1,6 +1,7 @@
 """
 This file contains code for the game "Water Sort Puzzle".
 Author: GlobalCreativeCommunityFounder
+Edited by: Alli Miles, Victoria Cella Xia, Fatima Varela Varela, Esha Saleem 
 """
 # Importing necessary libraries
 import copy #V: module with functions that allow copying elements/objects from lists, arrays, etc.

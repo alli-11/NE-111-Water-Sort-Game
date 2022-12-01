@@ -164,14 +164,14 @@ def main():
                                                                                                                     #all of original possible colours if there are 10+ bottles
                                                                                                                     #object 1, 2, 3, 4 from the original list of possible colours if not
         for i in range(number_of_empty_bottles): #V: loop will run for every empty bottle. 1 empty bottle -> range = [0]
-            bottles.append(Bottle([])) #A: append the empty list binded with Bottle during class Bottle to empty list bottles defined earlier in main?????
+            bottles.append(Bottle([])) #A: ?????
 
         for i in range(number_of_bottles - number_of_empty_bottles): #V: loop will run for every filled bottle
             water_levels: list = []  #A: defines a empty list "water_levels"
-            for j in range(4): #A: 
-                water_levels.append(Water(possible_colours[random.randint(0, len(possible_colours) - 1)]))
+            for j in range(4): #A: for 0, 1, 2, 3 (4 times total)
+                water_levels.append(Water(possible_colours[random.randint(0, len(possible_colours) - 1)])) #A: generates a random integer to be used as the index for the constant list of possible colors defined in Water then appends that entry (color) to the list water_levels
 
-            bottles.append(Bottle(water_levels))
+            bottles.append(Bottle(water_levels)) #A&V: append the ....???
 
         while not all_bottles_sorted(bottles):
             clear()

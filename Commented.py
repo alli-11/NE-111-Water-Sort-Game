@@ -81,9 +81,9 @@ class Bottle: #A: 'Bottle' is the name of the class
 
     def pour_water(self, other_bottle):
         # type: (Bottle) -> bool
-        self_last: Water = self.get_last_water_level() #
-        other_last: Water = other_bottle.get_last_water_level()
-        if len(other_bottle.get_water_levels()) >= self.BOTTLE_CAPACITY:
+        self_last: Water = self.get_last_water_level() #A&V: retrieve last (top) item in current bottle
+        other_last: Water = other_bottle.get_last_water_level() #A&V: retrieve top item in another bottle (called by method) #V: applies list of colors as method on other_bottle
+        if len(other_bottle.get_water_levels()) >= self.BOTTLE_CAPACITY: #A&V: length of list of colors in other bottle exceeds or equals Bottle Capacity return False 
             return False
         if other_last is None or self_last.colour == other_last.colour or len(other_bottle.__water_levels) == 0:
             self.__water_levels.remove(self_last)
@@ -103,23 +103,23 @@ class Bottle: #A: 'Bottle' is the name of the class
         if len(self.__water_levels) == 0: #A&V: if bottle is empty = automatically sorted
             return True
         else:
-            curr_colour: str = self.__water_levels[0].colour
-            for water in self.__water_levels:
-                if water.colour != curr_colour:
+            curr_colour: str = self.__water_levels[0].colour #A&V: check if first item (bottom of bottle) of randomly selected list of colors is in possible colors + assign string to variable
+            for water in self.__water_levels: #for every color in that list of colors
+                if water.colour != curr_colour: #A&V: if the colors in that original list are not equal to bottom color, return False
                     return False
 
             return True
 
-    def get_water_levels(self):
+    def get_water_levels(self): #A&V: returns color list (in tube) when called --> makes self.__water_levels a method
         # type: () -> list
-        return self.__water_levels
+        return self.__water_levels 
 
     def clone(self):
         # type: () -> Bottle
-        return copy.deepcopy(self)
+        return copy.deepcopy(self) #A&V: returns clone of object (completely independent from original)
 
 
-class Water:
+class Water: #V: second important object of the game
     """
     This class contains attributes of water
     """
@@ -136,7 +136,7 @@ class Water:
 
     def clone(self):
         # type: () -> Water
-        return copy.deepcopy(self)
+        return copy.deepcopy(self) #A: returns a clone of the object (completely separate from original)
 
 
 # Creating main function used to run the game.

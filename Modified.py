@@ -225,8 +225,8 @@ def main():
         if all_bottles_sorted(bottles):
                 for bottle in bottles: # for every item (bottle, which contain colors) in list of bottles created above
                     print(str(bottle) + "\n") #actually displays bottles built in Bottle
-                print ("Congratulation, farmer! You have saved your chickens and crops from imminent doom (maybe you should consider giving the foxes a treat ;) )")
-        level += 1
+                print ("Congratulations! The rainbow is no more :(")
+                level += 1
         print("Enter 'Y' for yes.") #A&V: printed after 'do you want to continue playing'
         print("Enter anything else for no.")
         continue_playing = input("Do you want to continue playing 'Water Sort Puzzle'? ") #A: once bottles are sorted, asks if while loop should continue

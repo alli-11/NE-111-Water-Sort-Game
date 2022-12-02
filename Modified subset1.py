@@ -188,7 +188,7 @@ def main():
     
 
     print("Welcome to Chemist's Jumble by 'GlobalCreativeCommunityFounder'.") #A: Prints welcome on the screen
-    print("In this game, you are required to make sure that each water bottle only contains one colour of water.") #A: Prints instructions on the screen
+    print("In this game, you are required to make sure that each beaker only contains one type of chemical compound.") #A: Prints instructions on the screen
     print("Enter 'Y' for yes.") #A: Prints instructions on the screen #V: asks for input
     print("Enter anything else for no.")  #A: Prints instructions on the screen
     level: int = 1 #A: defines variable "level" (int) as initially equal to 1
@@ -217,33 +217,33 @@ def main():
             clear()
 
             print("You are now at level " + str(level))
-            print("Current representation of each bottle is as below.\n") #A&V: prints both statements before the game starts
+            print("Current representation of each beaker is as below.\n") #A&V: prints both statements before the game starts
             for bottle in bottles: #V: for every item (bottle, which contain colors) in list of bottles created above
                 print(str(bottle) + "\n") #A&V: actually displays bottles built in Bottle
 
-            bottle_from_index: int = input("Please enter index of water bottle you want to pour bottle from " #A&V: asks user to pick a bottle (take color out of it)
+            bottle_from_index: int = input("Please enter index of beaker you want to pour chemical compound from " #A&V: asks user to pick a bottle (take color out of it)
                                                "(1 - " + str(len(bottles)) + "): ") #REMINDER: ADD INTEGER CHECK
-            bottle_to_index: int = input("Please enter index of water bottle you want to pour bottle to " #A&V: asks user for recipient bottle (put color into it)
+            bottle_to_index: int = input("Please enter index of beaker you want to pour chemical compound to "  #A&V: asks user for recipient bottle (put color into it)
                                              "(1 - " + str(len(bottles)) + "): ")
             while (is_int(bottle_from_index) == False or is_int(bottle_to_index) == False):
                 print("Invalid input! A different input is expected!") #A&V: checks for numerically invalid inputs (not TypeError inputs)
-                bottle_from_index = input("Please enter index of water bottle you want to pour bottle from "
+                bottle_from_index = input("Please enter index of beaker you want to pour chemical compound from "
                                               "(1 - " + str(len(bottles)) + "): ") #A&V: restates request for input (in case previous one was invalid)
-                bottle_to_index = input("Please enter index of water bottle you want to pour bottle to "
+                bottle_to_index = input("Please enter index of beaker you want to pour chemical compound to "
                                             "(1 - " + str(len(bottles)) + "): ")
             bottle_from_index = int(bottle_from_index)
             bottle_to_index = int(bottle_to_index)
             while bottle_from_index < 1 or bottle_from_index > len(bottles) or bottle_to_index < 1 or bottle_to_index > len(bottles) or bottle_from_index == bottle_to_index:
                 print("Invalid input! A different input is expected!") #A&V: checks for numerically invalid inputs (not TypeError inputs)
-                bottle_from_index = input("Please enter index of water bottle you want to pour bottle from "
+                bottle_from_index = input("Please enter index of beaker you want to pour chemical compound from "
                                               "(1 - " + str(len(bottles)) + "): ") #A&V: restates request for input (in case previous one was invalid)
-                bottle_to_index = input("Please enter index of water bottle you want to pour bottle to "
+                bottle_to_index = input("Please enter index of beaker you want to pour chemical compound to "
                                             "(1 - " + str(len(bottles)) + "): ")
                 while (is_int(bottle_from_index) == False or is_int(bottle_to_index) == False):
                     print("Invalid input! A different input is expected!") #A&V: checks for numerically invalid inputs (not TypeError inputs)
-                    bottle_from_index = input("Please enter index of water bottle you want to pour bottle from "
+                    bottle_from_index = input("Please enter index of beaker you want to pour chemical compound from "
                                                 "(1 - " + str(len(bottles)) + "): ") #A&V: restates request for input (in case previous one was invalid)
-                    bottle_to_index = input("Please enter index of water bottle you want to pour bottle to "
+                    bottle_to_index = input("Please enter index of beaker you want to pour chemical compound to "
                                                 "(1 - " + str(len(bottles)) + "): ")
                 bottle_from_index = int(bottle_from_index)
                 bottle_to_index = int(bottle_to_index)

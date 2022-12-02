@@ -1,5 +1,5 @@
 """
-This file contains code for the game "Farmer Hurstle".
+This file contains code for the game "Water Sort Puzzle".
 Author: GlobalCreativeCommunityFounder
 Edited by: Alli Miles, Victoria Cella Xia, Fatima Varela Varela, Esha Saleem 
 """
@@ -84,8 +84,6 @@ class Bottle: #'Bottle' is the name of the class
         # type: (Bottle) -> bool
         self_last: Water = self.get_last_water_level() # retrieve last (top) item in current bottle
         other_last: Water = other_bottle.get_last_water_level() # retrieve top item in another bottle (called by method) #applies list of foxes/chickens/corn as method on other_bottle
-        if self_last == None:
-            return False
         if len(other_bottle.get_water_levels()) >= self.BOTTLE_CAPACITY: #length of list of foxes/chickens/corn in other bottle exceeds or equals Bottle Capacity return False 
             return False
         if other_last is None or self_last.colour == other_last.colour or len(other_bottle.__water_levels) == 0: # If the bottle is empty (written twice) or the top colors of both bottles are the same
@@ -151,17 +149,17 @@ def main():
     :return: None
     """
 
-    print("Welcome to 'Famrer Hustle' by 'GlobalCreativeCommunityFounder'.") #A: Prints welcome on the screen
+    print("Welcome to 'Water Sort Puzzle' by 'GlobalCreativeCommunityFounder'.") #A: Prints welcome on the screen
     print("You are farmer. You have a pen of chickens and a cornfield. Recently you discovered that the jealous Farmer Dave, your nemesis, has released your chickens into your cornfield. \nWhen you went to catch them, \
 you spotted a family of foxes attempting to have chicken for lunch. Your job is to separate them all before \
 it's too late.")
     print ("~ ~ ~ ~ ~")
-    print ("Once you start (enter \"Y\"), you have 60 seconds to complete your task before all is lost.")
-    print("Once 60 seconds are up, you can finish your move before the chickens claim your corn and the foxes devour you chickens.")
+    print ("Once you start (enter \"Y\"), you have 40 seconds to complete your task before all is lost.")
+    print("Once 40 seconds are up, you can finish your move before the chickens claim your corn and the foxes devour you chickens.")
     print("Enter 'Y' for yes.") # Prints instructions on the screen #V: asks for input
     print("Enter anything else for no.")  #A: Prints instructions on the screen
     level: int = 1 #defines variable "level" (int) as initially equal to 1
-    continue_playing: str = input("Do you want to continue playing 'Farmer Hustle'? ") #E: Defines a variable "continue_playing" for users input (string)
+    continue_playing: str = input("Do you want to continue playing 'Water Sort Puzzle'? ") #E: Defines a variable "continue_playing" for users input (string)
     while continue_playing == "Y" or continue_playing == "y": # while the user's answer is yes/"Y" (they want to continue playing), the game code below will run
         bottles: list = []  #instantiate "bottles" as an empty list
         number_of_bottles: int = 5 + (level // 5) #defines a variable for the number of bottles (int) and is equal to 5 plus integer division of the level number by 5 
@@ -182,7 +180,7 @@ it's too late.")
             bottles.append(Bottle(water_levels)) #append the list created above to the object bottles + applying it to the class Bottle
 
         start_time = time.time()
-        time_limit = start_time + 60
+        time_limit = start_time + 40
         time_bool = True
         while time_bool == True:
 
@@ -190,33 +188,33 @@ it's too late.")
                 clear()
 
                 print("You are now at level " + str(level))
-                print("Current representation of each bottle is as below.\n") #prints both statements before the game starts
+                print("Current representation of each cage is as below.\n") #prints both statements before the game starts
                 for bottle in bottles: #for every item (bottle, which contain colors) in list of bottles created above
                     print(str(bottle) + "\n") #actually displays bottles built in Bottle
 
-                bottle_from_index: int = input("Please enter index of water bottle you want to pour bottle from " # asks user to pick a bottle (take color out of it)
+                bottle_from_index: int = input("Please enter index of barn you want to move barn from " # asks user to pick a bottle (take color out of it)
                                                 "(1 - " + str(len(bottles)) + "): ") #REMINDER: ADD INTEGER CHECK
-                bottle_to_index: int = input("Please enter index of water bottle you want to pour bottle to " #asks user for recipient bottle (put color into it)
+                bottle_to_index: int = input("Please enter index of barn you want to move barn to " #asks user for recipient bottle (put color into it)
                                                 "(1 - " + str(len(bottles)) + "): ")
                 while (is_int(bottle_from_index) == False or is_int(bottle_to_index) == False):
                     print("Invalid input! A different input is expected!") # checks for numerically invalid inputs (not TypeError inputs)
-                    bottle_from_index = input("Please enter index of water bottle you want to pour bottle from "
+                    bottle_from_index = input("Please enter index of barn you want to move barn from "
                                                 "(1 - " + str(len(bottles)) + "): ") #restates request for input (in case previous one was invalid)
-                    bottle_to_index = input("Please enter index of water bottle you want to pour bottle to "
+                    bottle_to_index = input("Please enter index of barn you want to move barn to "
                                                 "(1 - " + str(len(bottles)) + "): ")
                 bottle_from_index = int(bottle_from_index)
                 bottle_to_index = int(bottle_to_index)
                 while bottle_from_index < 1 or bottle_from_index > len(bottles) or bottle_to_index < 1 or bottle_to_index > len(bottles) or bottle_from_index == bottle_to_index:
                     print("Invalid input! A different input is expected!") #checks for numerically invalid inputs (not TypeError inputs)
-                    bottle_from_index = input("Please enter index of water bottle you want to pour bottle from "
+                    bottle_from_index = input("Please enter index of barn you want to move barn from "
                                                 "(1 - " + str(len(bottles)) + "): ") #restates request for input (in case previous one was invalid)
-                    bottle_to_index = input("Please enter index of water bottle you want to pour bottle to "
+                    bottle_to_index = input("Please enter index of barn you want to move barn to "
                                                 "(1 - " + str(len(bottles)) + "): ")
                     while (is_int(bottle_from_index) == False or is_int(bottle_to_index) == False):
                         print("Invalid input! A different input is expected!") #checks for numerically invalid inputs (not TypeError inputs)
-                        bottle_from_index = input("Please enter index of water bottle you want to pour bottle from "
+                        bottle_from_index = input("Please enter index of barn you want to move barn from "
                                                     "(1 - " + str(len(bottles)) + "): ") #restates request for input (in case previous one was invalid)
-                        bottle_to_index = input("Please enter index of water bottle you want to pour bottle to "
+                        bottle_to_index = input("Please enter index of barn you want to move barn to "
                                                     "(1 - " + str(len(bottles)) + "): ")
                     bottle_from_index = int(bottle_from_index)
                     bottle_to_index = int(bottle_to_index)
@@ -231,7 +229,7 @@ it's too late.")
             if all_bottles_sorted(bottles):
                 for bottle in bottles: # for every item (bottle, which contain colors) in list of bottles created above
                     print(str(bottle) + "\n") #actually displays bottles built in Bottle
-                print ("Congratulations, farmer! You have saved your chickens and crops from imminent doom (maybe you should consider giving the foxes a treat ;) )")
+                print ("Congratulation, farmer! You have saved your chickens and crops from imminent doom (maybe you should consider giving the foxes a treat ;) )")
                 break
 
 
@@ -242,7 +240,7 @@ it's too late.")
                 time_bool = False
                 break
         
-        continue_playing = input("Do you want to continue playing 'Farmer Hustle'? ") # once bottles are sorted, asks if while loop should continue
+        continue_playing = input("Do you want to continue playing 'Water Sort Puzzle'? ") # once bottles are sorted, asks if while loop should continue
         print("Enter 'Y' for yes.") #printed after 'do you want to continue playing'
         print("Enter anything else for no.")
     sys.exit() #if user's input is anything other than "Y".

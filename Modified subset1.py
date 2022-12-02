@@ -92,7 +92,7 @@ class Bottle: #A: 'Bottle' is the name of the class
         other_last: Water = other_bottle.get_last_water_level() #A&V: retrieve top item in another bottle (called by method) #V: applies list of colors as method on other_bottle
         if len(other_bottle.get_water_levels()) >= self.BOTTLE_CAPACITY: #A&V: length of list of colors in other bottle exceeds or equals Bottle Capacity return False 
             return False
-        if other_last is None or self_last.colour == other_last.colour or len(other_bottle.__water_levels) == 0: #A&V: If the bottle is empty (written twice) or the top colors of both bottles are the same
+        if other_last is None or (self_last in Water.WATER  and  other_last in Water.WATER) or (self_last in Water.TABLE_SALT and other_last in Water.TABLE_SALT) or (self_last in Water.BAKING_SODA and other_last in Water.BAKING_SODA) or (self_last in Water.BLEACH and other_last in Water.BLEACH) or (self_last in Water.EPSOM_SALT and other_last in Water.EPSOM_SALT) or (self_last in Water.QUARTZ and other_last in Water.QUARTZ) or len(other_bottle.__water_levels) == 0: #A&V: If the bottle is empty (written twice) or the top colors of both bottles are the same
             self.__water_levels.remove(self_last) #V: Removes the last item (top color) from the list of the current bottle
             other_bottle.add_water_level(self_last) #A: Adds the last item (top color) from the list of the current bottle to the end of the other bottle list (top of bottle)
             return True #V: so that the game will continue running
@@ -110,12 +110,22 @@ class Bottle: #A: 'Bottle' is the name of the class
         if len(self.__water_levels) == 0: #A&V: if bottle is empty = automatically sorted
             return True
         else:
-            curr_colour: str = self.__water_levels[0].colour #A&V: check if first item (bottom of bottle) of randomly selected list of colors is in possible colors + assign string to variable
-            for water in self.__water_levels: #for every color in that list of colors
-                if water.colour != curr_colour: #A&V: if the colors in that original list are not equal to bottom color, return False
+            curr_colour: str = self.__water_levels[0] #A&V: check if first item (bottom of bottle) of randomly selected list of colors is in possible colors + assign string to variable
+            for colour in self.__water_levels: #for every color in that list of colors
+                if not (colour in Water.WATER and curr_colour in Water.WATER):
                     return False
-
-            return True
+                elif not (colour in Water.TABLE_SALT and curr_colour in Water.TABLE_SALT):
+                    return False
+                elif not (colour in Water.BAKING_SODA and curr_colour in Water.BAKING_SODA):
+                    return False
+                elif not (colour in Water.BLEACH and curr_colour in Water.BLEACH):
+                    return False
+                elif not (colour in Water.EPSOM_SALT and curr_colour in Water.EPSOM_SALT):
+                    return False
+                elif not (colour in Water.QUARTZ and curr_colour in Water.QUARTZ):
+                    return False
+                else:
+                    return True 
 
     def get_water_levels(self): #A&V: returns color list (in tube) when called --> makes self.__water_levels a method
         # type: () -> list
@@ -130,12 +140,21 @@ class Water: #V: second important object of the game
     """
     This class contains attributes of water
     """
+    WATER = ["H2O", "Dihydrogen monoxide", "Water"]
+    TABLE_SALT = ["NaCl", "Sodium chloride", "Table salt"]
+    BAKING_SODA = ["NaHCO3", "Sodium bicarbonate", "Baking soda"]
+    BLEACH = ["NaOCl", "Sodium hypochlorite", "Bleach"]
+    EPSOM_SALT = ["MgSO4", "Magnesium sulfate", "Epsom salt"]
+    QUARTZ = ["SiO2","Silicon dioxide","Quartz"]
 
-    POSSIBLE_COLOURS: list = ["BLUE", "RED", "ORANGE", "GREEN", "PURPLE", "YELLOW"] #A: constant list
+    POSSIBLE_COLOURS: list = [WATER, TABLE_SALT, BAKING_SODA, BLEACH, EPSOM_SALT, QUARTZ] #A: constant list
 
     def __init__(self, colour): #A&V: initializing, attributing color to self
         # type: (str) -> None
-        self.colour: str = colour if colour in self.POSSIBLE_COLOURS else self.POSSIBLE_COLOURS[0] #A&V: assign 1 color to object. Deafult is blue
+        if colour in self.WATER or colour in self.TABLE_SALT or colour in self.BAKING_SODA or colour in self.BLEACH or colour in self.EPSOM_SALT or colour in self.QUARTZ: 
+            self.colour: str = colour  #A&V: assign 1 color to object. Deafult is blue
+        else:
+            self.colour = self.WATER[0]
 
     def __str__(self): #A&V: generates user-readable/usable output (from __init__)
         # type: () -> str
@@ -154,6 +173,7 @@ def main():
     This function is used to run the game.
     :return: None
     """
+    
 
     print("Welcome to 'Water Sort Puzzle' by 'GlobalCreativeCommunityFounder'.") #A: Prints welcome on the screen
     print("In this game, you are required to make sure that each water bottle only contains one colour of water.") #A: Prints instructions on the screen
@@ -175,8 +195,9 @@ def main():
 
         for i in range(number_of_bottles - number_of_empty_bottles): #V: loop will run for every filled bottle
             water_levels: list = []  #A: defines a empty list "water_levels"
-            for j in range(4): #A: for 0, 1, 2, 3 (4 times total)
-                water_levels.append(Water(possible_colours[random.randint(0, len(possible_colours) - 1)])) #A: generates a random integer to be used as the index for the constant list of possible colors defined in Water then appends that entry (color) to the list water_levels
+            for j in range(3): #A: for 0, 1, 2, 3 (4 times total)
+                group = possible_colours[random.randint(0, len(possible_colours) - 1)]
+                water_levels.append(group[random.randint(0, 2)]) #A: generates a random integer to be used as the index for the constant list of possible colors defined in Water then appends that entry (color) to the list water_levels
 
             bottles.append(Bottle(water_levels)) #A&V: append the list created above to the object bottles + applying it to the class Bottle
 

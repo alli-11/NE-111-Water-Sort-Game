@@ -112,18 +112,19 @@ class Bottle: #A: 'Bottle' is the name of the class
         else:
             curr_colour: str = self.__water_levels[0] #A&V: check if first item (bottom of bottle) of randomly selected list of colors is in possible colors + assign string to variable
             for colour in self.__water_levels: #for every color in that list of colors
-                if not (colour in Water.WATER and curr_colour in Water.WATER):
+                if (curr_colour in Water.WATER and colour not in Water.WATER) or (curr_colour in Water.TABLE_SALT and colour not in Water.TABLE_SALT) or (curr_colour in Water.BAKING_SODA and colour not in Water.BAKING_SODA) or \
+                    (colour in Water.BLEACH and curr_colour in Water.BLEACH) or (not (colour in Water.EPSOM_SALT and curr_colour in Water.EPSOM_SALT))  or (not (colour in Water.QUARTZ and curr_colour in Water.QUARTZ)):
                     return False
-                elif not (colour in Water.TABLE_SALT and curr_colour in Water.TABLE_SALT):
-                    return False
-                elif not (colour in Water.BAKING_SODA and curr_colour in Water.BAKING_SODA):
-                    return False
-                elif not (colour in Water.BLEACH and curr_colour in Water.BLEACH):
-                    return False
-                elif not (colour in Water.EPSOM_SALT and curr_colour in Water.EPSOM_SALT):
-                    return False
-                elif not (colour in Water.QUARTZ and curr_colour in Water.QUARTZ):
-                    return False
+                # elif not (colour in Water.TABLE_SALT and curr_colour in Water.TABLE_SALT):
+                #     return False
+                # elif not (colour in Water.BAKING_SODA and curr_colour in Water.BAKING_SODA):
+                #     return False
+                # elif not (colour in Water.BLEACH and curr_colour in Water.BLEACH):
+                #     return False
+                # elif not (colour in Water.EPSOM_SALT and curr_colour in Water.EPSOM_SALT):
+                #     return False
+                # elif not (colour in Water.QUARTZ and curr_colour in Water.QUARTZ):
+                #     return False
                 else:
                     return True 
 

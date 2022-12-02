@@ -188,7 +188,7 @@ it's too late.")
                 clear()
 
                 print("You are now at level " + str(level))
-                print("Current representation of each cage is as below.\n") #prints both statements before the game starts
+                print("Current representation of each barn is as below.\n") #prints both statements before the game starts
                 for bottle in bottles: #for every item (bottle, which contain colors) in list of bottles created above
                     print(str(bottle) + "\n") #actually displays bottles built in Bottle
 

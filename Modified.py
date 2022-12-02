@@ -23,9 +23,9 @@ def is_int(possible) :
 def clear(): #V&A: test for a specific system version -> being able to run in different operating systems
     # type: () -> None
     if sys.platform.startswith('win'):
-        os.system('cls')  # For Windows System
+        os.system('cls')  # F: For Windows System
     else:
-        os.system('clear')  # For Linux System
+        os.system('clear')  #F: For Linux System
 
 
 def all_bottles_sorted(bottles: list) -> bool: #All: -> bool shows what the function will return but does not force function to return bool (solely for readability)
@@ -90,6 +90,8 @@ class Bottle: #A: 'Bottle' is the name of the class
         # type: (Bottle) -> bool
         self_last: Water = self.get_last_water_level() #A&V: retrieve last (top) item in current bottle
         other_last: Water = other_bottle.get_last_water_level() #A&V: retrieve top item in another bottle (called by method) #V: applies list of colors as method on other_bottle
+        if self_last == None:
+            return False
         if len(other_bottle.get_water_levels()) >= self.BOTTLE_CAPACITY: #A&V: length of list of colors in other bottle exceeds or equals Bottle Capacity return False 
             return False
         if other_last is None or self_last.colour == other_last.colour or len(other_bottle.__water_levels) == 0: #A&V: If the bottle is empty (written twice) or the top colors of both bottles are the same
@@ -219,8 +221,12 @@ def main():
             bottle_from: Bottle = bottles[bottle_from_index - 1] #A&V: new variable refering to class Bottle --> picks bottle (from bottles) chosen by user with corresponding index 
             bottle_to: Bottle = bottles[bottle_to_index - 1] #A&V: picks bottle (from bottles) to receive color --> from index chosen by user
             bottle_from.pour_water(bottle_to) #A&V: applies method pour_water (from Bottle) with bottle_from as self and bottle_to as other_bottle
-
-
+       
+        if all_bottles_sorted(bottles):
+                for bottle in bottles: # for every item (bottle, which contain colors) in list of bottles created above
+                    print(str(bottle) + "\n") #actually displays bottles built in Bottle
+                print ("Congratulation, farmer! You have saved your chickens and crops from imminent doom (maybe you should consider giving the foxes a treat ;) )")
+        level += 1
         print("Enter 'Y' for yes.") #A&V: printed after 'do you want to continue playing'
         print("Enter anything else for no.")
         continue_playing = input("Do you want to continue playing 'Water Sort Puzzle'? ") #A: once bottles are sorted, asks if while loop should continue

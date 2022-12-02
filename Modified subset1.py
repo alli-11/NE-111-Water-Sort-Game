@@ -90,6 +90,8 @@ class Bottle: #A: 'Bottle' is the name of the class
         # type: (Bottle) -> bool
         self_last: Water = self.get_last_water_level() #A&V: retrieve last (top) item in current bottle
         other_last: Water = other_bottle.get_last_water_level() #A&V: retrieve top item in another bottle (called by method) #V: applies list of colors as method on other_bottle
+        if self_last == None:
+            return False
         if len(other_bottle.get_water_levels()) >= self.BOTTLE_CAPACITY: #A&V: length of list of colors in other bottle exceeds or equals Bottle Capacity return False 
             return False
         if other_last is None or (self_last in Water.WATER  and  other_last in Water.WATER) or (self_last in Water.TABLE_SALT and other_last in Water.TABLE_SALT) or (self_last in Water.BAKING_SODA and other_last in Water.BAKING_SODA) or (self_last in Water.BLEACH and other_last in Water.BLEACH) or (self_last in Water.EPSOM_SALT and other_last in Water.EPSOM_SALT) or (self_last in Water.QUARTZ and other_last in Water.QUARTZ) or len(other_bottle.__water_levels) == 0: #A&V: If the bottle is empty (written twice) or the top colors of both bottles are the same
@@ -111,10 +113,17 @@ class Bottle: #A: 'Bottle' is the name of the class
             return True
         else:
             curr_colour: str = self.__water_levels[0] #A&V: check if first item (bottom of bottle) of randomly selected list of colors is in possible colors + assign string to variable
-            for colour in self.__water_levels: #for every color in that list of colors
-                if (curr_colour in Water.WATER and colour not in Water.WATER) or (curr_colour in Water.TABLE_SALT and colour not in Water.TABLE_SALT) or (curr_colour in Water.BAKING_SODA and colour not in Water.BAKING_SODA) or \
-                    (curr_colour in Water.BLEACH and colour not in Water.BLEACH) or (curr_colour in Water.EPSOM_SALT and colour not in Water.EPSOM_SALT)  or (curr_colour in Water.QUARTZ and colour not in Water.QUARTZ)):
-                    return False
+            #for colour in self.__water_levels: #for every color in that list of colors
+            length = len(self.__water_levels)
+            i = 0
+            trues = []
+            while i < length:
+                if (self.__water_levels[i] in Water.WATER and curr_colour in Water.WATER) or (self.__water_levels[i] in Water.TABLE_SALT and curr_colour in Water.TABLE_SALT) or (self.__water_levels[i] in Water.BAKING_SODA and curr_colour in Water.BAKING_SODA) or (self.__water_levels[i] in Water.BLEACH and curr_colour in Water.BLEACH) or (self.__water_levels[i] in Water.EPSOM_SALT and curr_colour in Water.EPSOM_SALT) or (self.__water_levels[i] in Water.QUARTZ and curr_colour in Water.QUARTZ):
+                    trues.append(1)
+                    i += 1
+                #if (curr_colour in Water.WATER and not(colour in Water.WATER)) or (curr_colour in Water.TABLE_SALT and not(colour in Water.TABLE_SALT)) or (curr_colour in Water.BAKING_SODA and not(colour in Water.BAKING_SODA)) or \
+                    #(curr_colour in Water.BLEACH and not(colour in Water.BLEACH)) or (curr_colour in Water.EPSOM_SALT and not(colour in Water.EPSOM_SALT))  or (curr_colour in Water.QUARTZ and not(colour in Water.QUARTZ)):
+                    #return False
                 # elif not (colour in Water.TABLE_SALT and curr_colour in Water.TABLE_SALT):
                 #     return False
                 # elif not (colour in Water.BAKING_SODA and curr_colour in Water.BAKING_SODA):
@@ -126,7 +135,9 @@ class Bottle: #A: 'Bottle' is the name of the class
                 # elif not (colour in Water.QUARTZ and curr_colour in Water.QUARTZ):
                 #     return False
                 else:
-                    return True 
+                    return False
+            if len(trues) == length:
+                return True 
 
     def get_water_levels(self): #A&V: returns color list (in tube) when called --> makes self.__water_levels a method
         # type: () -> list
@@ -176,12 +187,12 @@ def main():
     """
     
 
-    print("Welcome to 'Water Sort Puzzle' by 'GlobalCreativeCommunityFounder'.") #A: Prints welcome on the screen
+    print("Welcome to Chemist's Jumble by 'GlobalCreativeCommunityFounder'.") #A: Prints welcome on the screen
     print("In this game, you are required to make sure that each water bottle only contains one colour of water.") #A: Prints instructions on the screen
     print("Enter 'Y' for yes.") #A: Prints instructions on the screen #V: asks for input
     print("Enter anything else for no.")  #A: Prints instructions on the screen
     level: int = 1 #A: defines variable "level" (int) as initially equal to 1
-    continue_playing: str = input("Do you want to continue playing 'Water Sort Puzzle'? ") #E: Defines a variable "continue_playing" for users input (string)
+    continue_playing: str = input("Do you want to continue playing 'Chemist's Jumble'? ") #E: Defines a variable "continue_playing" for users input (string)
     while continue_playing == "Y" or continue_playing == "y": #A: while the user's answer is yes/"Y" (they want to continue playing), the game code below will run
         bottles: list = []  #E: instantiate "bottles" as an empty list
         number_of_bottles: int = 5 + (level // 5) #A: defines a variable for the number of bottles (int) and is equal to 5 plus integer division of the level number by 5 
@@ -196,7 +207,7 @@ def main():
 
         for i in range(number_of_bottles - number_of_empty_bottles): #V: loop will run for every filled bottle
             water_levels: list = []  #A: defines a empty list "water_levels"
-            for j in range(3): #A: for 0, 1, 2, 3 (4 times total)
+            for j in range(3): #A: for 0, 1, 2
                 group = possible_colours[random.randint(0, len(possible_colours) - 1)]
                 water_levels.append(group[random.randint(0, 2)]) #A: generates a random integer to be used as the index for the constant list of possible colors defined in Water then appends that entry (color) to the list water_levels
 
@@ -245,7 +256,7 @@ def main():
 
         print("Enter 'Y' for yes.") #A&V: printed after 'do you want to continue playing'
         print("Enter anything else for no.")
-        continue_playing = input("Do you want to continue playing 'Water Sort Puzzle'? ") #A: once bottles are sorted, asks if while loop should continue
+        continue_playing = input("Do you want to continue playing Chemist's Jumble? ") #A: once bottles are sorted, asks if while loop should continue
     sys.exit() #A&V: if user's input is anything other than "Y".
 
 

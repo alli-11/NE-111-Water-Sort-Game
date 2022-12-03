@@ -121,19 +121,6 @@ class Bottle: #A: 'Bottle' is the name of the class
                 if (self.__water_levels[i] in Water.WATER and curr_colour in Water.WATER) or (self.__water_levels[i] in Water.TABLE_SALT and curr_colour in Water.TABLE_SALT) or (self.__water_levels[i] in Water.BAKING_SODA and curr_colour in Water.BAKING_SODA) or (self.__water_levels[i] in Water.BLEACH and curr_colour in Water.BLEACH) or (self.__water_levels[i] in Water.EPSOM_SALT and curr_colour in Water.EPSOM_SALT) or (self.__water_levels[i] in Water.QUARTZ and curr_colour in Water.QUARTZ):
                     trues.append(1)
                     i += 1
-                #if (curr_colour in Water.WATER and not(colour in Water.WATER)) or (curr_colour in Water.TABLE_SALT and not(colour in Water.TABLE_SALT)) or (curr_colour in Water.BAKING_SODA and not(colour in Water.BAKING_SODA)) or \
-                    #(curr_colour in Water.BLEACH and not(colour in Water.BLEACH)) or (curr_colour in Water.EPSOM_SALT and not(colour in Water.EPSOM_SALT))  or (curr_colour in Water.QUARTZ and not(colour in Water.QUARTZ)):
-                    #return False
-                # elif not (colour in Water.TABLE_SALT and curr_colour in Water.TABLE_SALT):
-                #     return False
-                # elif not (colour in Water.BAKING_SODA and curr_colour in Water.BAKING_SODA):
-                #     return False
-                # elif not (colour in Water.BLEACH and curr_colour in Water.BLEACH):
-                #     return False
-                # elif not (colour in Water.EPSOM_SALT and curr_colour in Water.EPSOM_SALT):
-                #     return False
-                # elif not (colour in Water.QUARTZ and curr_colour in Water.QUARTZ):
-                #     return False
                 else:
                     return False
             if len(trues) == length:
@@ -223,28 +210,44 @@ def main():
 
             bottle_from_index: int = input("Please enter index of beaker you want to pour chemical compound from " #A&V: asks user to pick a bottle (take color out of it)
                                                "(1 - " + str(len(bottles)) + "): ") #REMINDER: ADD INTEGER CHECK
+            if bottle_from_index == "r":
+                    break
             bottle_to_index: int = input("Please enter index of beaker you want to pour chemical compound to "  #A&V: asks user for recipient bottle (put color into it)
                                              "(1 - " + str(len(bottles)) + "): ")
+            if bottle_to_index == "r":
+                    break
             while (is_int(bottle_from_index) == False or is_int(bottle_to_index) == False):
                 print("Invalid input! A different input is expected!") #A&V: checks for numerically invalid inputs (not TypeError inputs)
                 bottle_from_index = input("Please enter index of beaker you want to pour chemical compound from "
                                               "(1 - " + str(len(bottles)) + "): ") #A&V: restates request for input (in case previous one was invalid)
+                if bottle_from_index == "r":
+                    break
                 bottle_to_index = input("Please enter index of beaker you want to pour chemical compound to "
                                             "(1 - " + str(len(bottles)) + "): ")
+                if bottle_to_index == "r":
+                    break
             bottle_from_index = int(bottle_from_index)
             bottle_to_index = int(bottle_to_index)
             while bottle_from_index < 1 or bottle_from_index > len(bottles) or bottle_to_index < 1 or bottle_to_index > len(bottles) or bottle_from_index == bottle_to_index:
                 print("Invalid input! A different input is expected!") #A&V: checks for numerically invalid inputs (not TypeError inputs)
                 bottle_from_index = input("Please enter index of beaker you want to pour chemical compound from "
                                               "(1 - " + str(len(bottles)) + "): ") #A&V: restates request for input (in case previous one was invalid)
+                if bottle_from_index == "r":
+                    break
                 bottle_to_index = input("Please enter index of beaker you want to pour chemical compound to "
                                             "(1 - " + str(len(bottles)) + "): ")
+                if bottle_to_index == "r":
+                    break
                 while (is_int(bottle_from_index) == False or is_int(bottle_to_index) == False):
                     print("Invalid input! A different input is expected!") #A&V: checks for numerically invalid inputs (not TypeError inputs)
                     bottle_from_index = input("Please enter index of beaker you want to pour chemical compound from "
                                                 "(1 - " + str(len(bottles)) + "): ") #A&V: restates request for input (in case previous one was invalid)
+                    if bottle_from_index == "r":
+                        break
                     bottle_to_index = input("Please enter index of beaker you want to pour chemical compound to "
                                                 "(1 - " + str(len(bottles)) + "): ")
+                    if bottle_to_index == "r":
+                        break
                 bottle_from_index = int(bottle_from_index)
                 bottle_to_index = int(bottle_to_index)
             

@@ -251,20 +251,20 @@ def main():
                 bottle_from_index = int(bottle_from_index)
                 bottle_to_index = int(bottle_to_index)
             
-            if all_bottles_sorted(bottles):
-                for bottle in bottles: # for every item (bottle, which contain colors) in list of bottles created above
-                    print(str(bottle) + "\n") #actually displays bottles built in Bottle
-                print ("Congratulations! Ace that chem exam ;)")
-                level += 1
+            
                 
             bottle_from: Bottle = bottles[bottle_from_index - 1] #A&V: new variable refering to class Bottle --> picks bottle (from bottles) chosen by user with corresponding index 
             bottle_to: Bottle = bottles[bottle_to_index - 1] #A&V: picks bottle (from bottles) to receive color --> from index chosen by user
             bottle_from.pour_water(bottle_to) #A&V: applies method pour_water (from Bottle) with bottle_from as self and bottle_to as other_bottle
 
-
-        print("Enter 'Y' for yes.") #A&V: printed after 'do you want to continue playing'
-        print("Enter anything else for no.")
-        continue_playing = input("Do you want to continue playing Chemist's Jumble? ") #A: once bottles are sorted, asks if while loop should continue
+        if all_bottles_sorted(bottles):
+            for bottle in bottles: # for every item (bottle, which contain colors) in list of bottles created above
+                print(str(bottle) + "\n") #actually displays bottles built in Bottle
+            print ("Congratulations! Ace that chem exam ;)")
+            level += 1
+            print("Enter 'Y' for yes.") #A&V: printed after 'do you want to continue playing'
+            print("Enter anything else for no.")
+            continue_playing = input("Do you want to continue playing Chemist's Jumble? ") #A: once bottles are sorted, asks if while loop should continue
     sys.exit() #A&V: if user's input is anything other than "Y".
 
 

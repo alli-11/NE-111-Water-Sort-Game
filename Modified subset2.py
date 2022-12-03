@@ -182,7 +182,7 @@ it's too late.")
             bottles.append(Bottle(water_levels)) #append the list created above to the object bottles + applying it to the class Bottle
 
         start_time = time.time()
-        time_limit = start_time + 60
+        time_limit = start_time + 600
         time_bool = True
         while time_bool == True:
 
@@ -196,6 +196,7 @@ it's too late.")
 
                 bottle_from_index: int = input("Please enter index of water bottle you want to pour bottle from " # asks user to pick a bottle (take color out of it)
                                                 "(1 - " + str(len(bottles)) + "): ") #REMINDER: ADD INTEGER CHECK
+                
                 bottle_to_index: int = input("Please enter index of water bottle you want to pour bottle to " #asks user for recipient bottle (put color into it)
                                                 "(1 - " + str(len(bottles)) + "): ")
                 while (is_int(bottle_from_index) == False or is_int(bottle_to_index) == False):

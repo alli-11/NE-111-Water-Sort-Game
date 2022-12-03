@@ -169,18 +169,21 @@ def main():
                                                   #V: at levels 1&2 there'll be 5 bottles
         number_of_empty_bottles: int = number_of_bottles // 5 #A: defines a variable for the number of empty bottles (int) and is equal to the number of bottles integer divided by 5
                                                               #V: at 5 total bottles, there'll only be one empty
+        filled_bottles = number_of_bottles - number_of_empty_bottles
         possible_colours: list = Water.POSSIBLE_COLOURS if number_of_bottles >= 10 else Water.POSSIBLE_COLOURS[0:4] #A: creates list of possible colours:
                                                                                                                     #all of original possible colours if there are 10+ bottles
                                                                                                                     #object 1, 2, 3, 4 from the original list of possible colours if not
         for i in range(number_of_empty_bottles): #V: loop will run for every empty bottle. 1 empty bottle -> range = [0]
             bottles.append(Bottle([])) #A&V: creating empty bottles/empty lists (level 1 will have 1 empty bottle)
-
-        for i in range(number_of_bottles - number_of_empty_bottles): #V: loop will run for every filled bottle
+        
+        i = 0
+        while i < filled_bottles: #V: loop will run for every filled bottle
             water_levels: list = []  #A: defines a empty list "water_levels"
             for j in range(4): #A: for 0, 1, 2, 3 (4 times total)
                 water_levels.append(Water(possible_colours[random.randint(0, len(possible_colours) - 1)])) #A: generates a random integer to be used as the index for the constant list of possible colors defined in Water then appends that entry (color) to the list water_levels
 
             bottles.append(Bottle(water_levels)) #A&V: append the list created above to the object bottles + applying it to the class Bottle
+            i += 1
 
         while not all_bottles_sorted(bottles): #A&V: while the user hasn't sorted like colors into one tube
             clear()
@@ -190,30 +193,46 @@ def main():
             for bottle in bottles: #V: for every item (bottle, which contain colors) in list of bottles created above
                 print(str(bottle) + "\n") #A&V: actually displays bottles built in Bottle
 
-            bottle_from_index: int = input("Please enter index of water bottle you want to pour bottle from " #A&V: asks user to pick a bottle (take color out of it)
+            bottle_from_index: int = input("Press \"r\" at any time to restart. \nPlease enter index of water bottle you want to pour bottle from " #A&V: asks user to pick a bottle (take color out of it)
                                                "(1 - " + str(len(bottles)) + "): ") #REMINDER: ADD INTEGER CHECK
+            if bottle_from_index == "r":
+                    break
             bottle_to_index: int = input("Please enter index of water bottle you want to pour bottle to " #A&V: asks user for recipient bottle (put color into it)
                                              "(1 - " + str(len(bottles)) + "): ")
+            if bottle_to_index == "r":
+                    break
             while (is_int(bottle_from_index) == False or is_int(bottle_to_index) == False):
                 print("Invalid input! A different input is expected!") #A&V: checks for numerically invalid inputs (not TypeError inputs)
-                bottle_from_index = input("Please enter index of water bottle you want to pour bottle from "
+                bottle_from_index = input("Press \"r\" at any time to restart. \nPlease enter index of water bottle you want to pour bottle from "
                                               "(1 - " + str(len(bottles)) + "): ") #A&V: restates request for input (in case previous one was invalid)
+                if bottle_from_index == "r":
+                    break
                 bottle_to_index = input("Please enter index of water bottle you want to pour bottle to "
                                             "(1 - " + str(len(bottles)) + "): ")
+                if bottle_to_index == "r":
+                    break
             bottle_from_index = int(bottle_from_index)
             bottle_to_index = int(bottle_to_index)
             while bottle_from_index < 1 or bottle_from_index > len(bottles) or bottle_to_index < 1 or bottle_to_index > len(bottles) or bottle_from_index == bottle_to_index:
                 print("Invalid input! A different input is expected!") #A&V: checks for numerically invalid inputs (not TypeError inputs)
-                bottle_from_index = input("Please enter index of water bottle you want to pour bottle from "
+                bottle_from_index = input("Press \"r\" at any time to restart. \nPlease enter index of water bottle you want to pour bottle from "
                                               "(1 - " + str(len(bottles)) + "): ") #A&V: restates request for input (in case previous one was invalid)
+                if bottle_from_index == "r":
+                    break
                 bottle_to_index = input("Please enter index of water bottle you want to pour bottle to "
                                             "(1 - " + str(len(bottles)) + "): ")
+                if bottle_to_index == "r":
+                    break
                 while (is_int(bottle_from_index) == False or is_int(bottle_to_index) == False):
                     print("Invalid input! A different input is expected!") #A&V: checks for numerically invalid inputs (not TypeError inputs)
-                    bottle_from_index = input("Please enter index of water bottle you want to pour bottle from "
+                    bottle_from_index = input("Press \"r\" at any time to restart. \nPlease enter index of water bottle you want to pour bottle from "
                                                 "(1 - " + str(len(bottles)) + "): ") #A&V: restates request for input (in case previous one was invalid)
+                    if bottle_from_index == "r":
+                        break
                     bottle_to_index = input("Please enter index of water bottle you want to pour bottle to "
                                                 "(1 - " + str(len(bottles)) + "): ")
+                    if bottle_to_index == "r":
+                        break
                 bottle_from_index = int(bottle_from_index)
                 bottle_to_index = int(bottle_to_index)
 
@@ -223,13 +242,13 @@ def main():
             bottle_from.pour_water(bottle_to) #A&V: applies method pour_water (from Bottle) with bottle_from as self and bottle_to as other_bottle
        
         if all_bottles_sorted(bottles):
-                for bottle in bottles: # for every item (bottle, which contain colors) in list of bottles created above
-                    print(str(bottle) + "\n") #actually displays bottles built in Bottle
-                print ("Congratulations! The rainbow is no more :(")
-                level += 1
-        print("Enter 'Y' for yes.") #A&V: printed after 'do you want to continue playing'
-        print("Enter anything else for no.")
-        continue_playing = input("Do you want to continue playing 'Water Sort Puzzle'? ") #A: once bottles are sorted, asks if while loop should continue
+            for bottle in bottles: # for every item (bottle, which contain colors) in list of bottles created above
+                print(str(bottle) + "\n") #actually displays bottles built in Bottle
+            print ("Congratulations! The rainbow is no more :(")
+            level += 1
+            print("Enter 'Y' for yes.") #A&V: printed after 'do you want to continue playing'
+            print("Enter anything else for no.")
+            continue_playing = input("Do you want to continue playing 'Water Sort Puzzle'? ") #A: once bottles are sorted, asks if while loop should continue
     sys.exit() #A&V: if user's input is anything other than "Y".
 
 

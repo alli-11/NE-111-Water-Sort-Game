@@ -231,6 +231,7 @@ it's too late.")
             if all_bottles_sorted(bottles):
                 for bottle in bottles: # for every item (bottle, which contain colors) in list of bottles created above
                     print(str(bottle) + "\n") #actually displays bottles built in Bottle
+                level += 1
                 print ("Congratulations, farmer! You have saved your chickens and crops from imminent doom (maybe you should consider giving the foxes a treat ;) )")
                 break
 

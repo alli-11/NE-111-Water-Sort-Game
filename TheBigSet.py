@@ -133,7 +133,6 @@ while True:
             """
             This class contains attributes of water
             """
-
             POSSIBLE_COLOURS: list = ["BLUE", "RED", "ORANGE", "GREEN", "PURPLE", "YELLOW"] #A: constant list
 
             def __init__(self, colour): #A&V: initializing, attributing color to self

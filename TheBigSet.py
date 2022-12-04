@@ -1,4 +1,4 @@
-# Importing necessary libraries: MODIFIED
+ # Importing necessary libraries: MODIFIED
 import copy #V: module with functions that allow copying elements/objects from lists, arrays, etc.
 import sys #A: module that provides info on constants/functions/methods of python interpreter
 import os #F: module that provides functions to interact with operating system info and control processes
@@ -163,7 +163,7 @@ while True:
             print("Enter 'Y' for yes.") #A: Prints instructions on the screen #V: asks for input
             print("Enter anything else for no and exit the game.")  #A: Prints instructions on the screen
             level: int = 1 #A: defines variable "level" (int) as initially equal to 1
-            continue_playing: str = input("Do you want to continue playing 'Water Sort Puzzle'? ") #E: Defines a variable "continue_playing" for users input (string)
+            continue_playing: str = input("Do you want to play 'Water Sort Puzzle'? ") #E: Defines a variable "continue_playing" for users input (string)
             while continue_playing == "Y" or continue_playing == "y": #A: while the user's answer is yes/"Y" (they want to continue playing), the game code below will run
                 bottles: list = []  #E: instantiate "bottles" as an empty list
                 number_of_bottles: int = 5 + (level // 5) #A: defines a variable for the number of bottles (int) and is equal to 5 plus integer division of the level number by 5 
@@ -194,21 +194,21 @@ while True:
                     for bottle in bottles: #V: for every item (bottle, which contain colors) in list of bottles created above
                         print(str(bottle) + "\n") #A&V: actually displays bottles built in Bottle
 
-                    bottle_from_index: int = input("Press \"r\" at any time to restart. \nPlease enter index of water bottle you want to pour bottle from " #A&V: asks user to pick a bottle (take color out of it)
+                    bottle_from_index: int = input("Press \"r\" at any time to restart. \nPlease enter index of water bottle you want to pour coloured water from " #A&V: asks user to pick a bottle (take color out of it)
                                                     "(1 - " + str(len(bottles)) + "): ") #REMINDER: ADD INTEGER CHECK
                     if bottle_from_index == "r":
                             break
-                    bottle_to_index: int = input("Please enter index of water bottle you want to pour bottle to " #A&V: asks user for recipient bottle (put color into it)
+                    bottle_to_index: int = input("Please enter index of water bottle you want to pour coloured water to " #A&V: asks user for recipient bottle (put color into it)
                                                     "(1 - " + str(len(bottles)) + "): ")
                     if bottle_to_index == "r":
                             break
                     while (is_int(bottle_from_index) == False or is_int(bottle_to_index) == False):
                         print("Invalid input! A different input is expected!") #A&V: checks for numerically invalid inputs (not TypeError inputs)
-                        bottle_from_index = input("Press \"r\" at any time to restart. \nPlease enter index of water bottle you want to pour bottle from "
+                        bottle_from_index = input("Press \"r\" at any time to restart. \nPlease enter index of water bottle you want to pour coloured water from "
                                                     "(1 - " + str(len(bottles)) + "): ") #A&V: restates request for input (in case previous one was invalid)
                         if bottle_from_index == "r":
                             break
-                        bottle_to_index = input("Please enter index of water bottle you want to pour bottle to "
+                        bottle_to_index = input("Please enter index of water bottle you want to pour coloured water to "
                                                     "(1 - " + str(len(bottles)) + "): ")
                         if bottle_to_index == "r":
                             break
@@ -216,21 +216,21 @@ while True:
                     bottle_to_index = int(bottle_to_index)
                     while bottle_from_index < 1 or bottle_from_index > len(bottles) or bottle_to_index < 1 or bottle_to_index > len(bottles) or bottle_from_index == bottle_to_index:
                         print("Invalid input! A different input is expected!") #A&V: checks for numerically invalid inputs (not TypeError inputs)
-                        bottle_from_index = input("Press \"r\" at any time to restart. \nPlease enter index of water bottle you want to pour bottle from "
+                        bottle_from_index = input("Press \"r\" at any time to restart. \nPlease enter index of water bottle you want to pour coloured water from "
                                                     "(1 - " + str(len(bottles)) + "): ") #A&V: restates request for input (in case previous one was invalid)
                         if bottle_from_index == "r":
                             break
-                        bottle_to_index = input("Please enter index of water bottle you want to pour bottle to "
+                        bottle_to_index = input("Please enter index of water bottle you want to pour coloured water to "
                                                     "(1 - " + str(len(bottles)) + "): ")
                         if bottle_to_index == "r":
                             break
                         while (is_int(bottle_from_index) == False or is_int(bottle_to_index) == False):
                             print("Invalid input! A different input is expected!") #A&V: checks for numerically invalid inputs (not TypeError inputs)
-                            bottle_from_index = input("Press \"r\" at any time to restart. \nPlease enter index of water bottle you want to pour bottle from "
+                            bottle_from_index = input("Press \"r\" at any time to restart. \nPlease enter index of water bottle you want to pour coloured water from "
                                                         "(1 - " + str(len(bottles)) + "): ") #A&V: restates request for input (in case previous one was invalid)
                             if bottle_from_index == "r":
                                 break
-                            bottle_to_index = input("Please enter index of water bottle you want to pour bottle to "
+                            bottle_to_index = input("Please enter index of water bottle you want to pour coloured water to "
                                                         "(1 - " + str(len(bottles)) + "): ")
                             if bottle_to_index == "r":
                                 break
@@ -245,7 +245,7 @@ while True:
                 if all_bottles_sorted(bottles):
                     for bottle in bottles: # for every item (bottle, which contain colors) in list of bottles created above
                         print(str(bottle) + "\n") #actually displays bottles built in Bottle
-                    print ("Congratulations! The rainbow is no more :(")
+                    print ("Congratulations! The coloured water is sorted:(")
                     level += 1
                     print("Enter 'Y' for yes.") #A&V: printed after 'do you want to continue playing'
                     print("Enter anything else to return to game selection.")
@@ -310,16 +310,28 @@ while True:
                 for i in range(self.BOTTLE_CAPACITY - 1, -1, -1): #F: binding object to BOTTLE_CAPACITY #Range(4, -1, -1) -> [4, 0] 
                     if i >= len(self.__water_levels): #V: for every level of the actual bottle (4, 3, 2, 1, 0), if number is greater or equal to the length of the list, the string is reset to 'empty walls of the tube' 
                         #V: if the bottle capacity is greater than the water level --> for empty lists(water_levels), loop will run 5 times (create a tube with 5 lines of walls)
-                        res += "|        |\n" 
+                        res += "|                     |\n" 
                     else: #V: in case self's list is not empty
                         curr_water_level: Water = self.__water_levels[i] #V: indexes 0, 1, 2, 3, 4 of list of water levels --> meant to align empty and filled tube wall sections
-                        if len(str(curr_water_level)) == 3: #V: for 'RED'
-                            res += "|   " + str(curr_water_level) + "  |\n"
-                        elif len(str(curr_water_level)) == 4: #V: for 'BLUE'
+                        if len(str(curr_water_level)) == 3: # for 'H2O'
+                            res += "|         " + str(curr_water_level) + "         |\n"
+                        elif len(str(curr_water_level)) == 4: # for 'NaCl'and 'SiO2'
+                            res += "|        " + str(curr_water_level) + "         |\n"
+                        elif len(str(curr_water_level)) == 5: # for 'NaOCl' and 'Water' and 'MgSO4'
+                            res += "|        " + str(curr_water_level) + "        |\n"
+                        elif len(str(curr_water_level)) == 6: # for 'NaOCl' and 'Water' and 'MgSO4'
+                            res += "|       " + str(curr_water_level) + "        |\n"
+                        elif len(str(curr_water_level)) == 10: # for 'Table salt' and 'Epsom salt'
+                            res += "|     " + str(curr_water_level) + "      |\n"
+                        elif len(str(curr_water_level)) == 11: # for 'Baking soda'
+                            res += "|     " + str(curr_water_level) + "     |\n"
+                        elif len(str(curr_water_level)) == 15: # for 'Sodium chloride' and 'Silicon dioxide'
+                            res += "|   " + str(curr_water_level) + "   |\n"
+                        elif len(str(curr_water_level)) == 17: # for 'Magnesium sulfate'
                             res += "|  " + str(curr_water_level) + "  |\n"
-                        elif len(str(curr_water_level)) == 5: #V: "GREEN"
-                            res += "|  " + str(curr_water_level) + " |\n"
-                        else: #V: "ORANGE", "PURPLE", "YELLOW
+                        elif len(str(curr_water_level)) == 18: # for 'Sodium bicarbonate'
+                            res += "| " + str(curr_water_level) + "  |\n"
+                        else: # 'Dihydrogen monoxide' and 'Sodium hypochlorite'
                             res += "| " + str(curr_water_level) + " |\n"
 
                 return res #output will be a visual representation of the water tube
@@ -420,13 +432,13 @@ while True:
             """
             
             print()
-            print("Welcome to Chemist's Jumble by 'GlobalCreativeCommunityFounder'.") #A: Prints welcome on the screen
+            print("Welcome to Chemist's Jumble.") #A: Prints welcome on the screen
             print("In this game, you are required to make sure that each beaker only contains one type of chemical compound.") #A: Prints instructions on the screen
             print()
             print("Enter 'Y' for yes.") #A: Prints instructions on the screen #V: asks for input
             print("Enter anything else for no and exit the game.")  #A: Prints instructions on the screen
             level: int = 1 #A: defines variable "level" (int) as initially equal to 1
-            continue_playing: str = input("Do you want to continue playing 'Chemist's Jumble'? ") #E: Defines a variable "continue_playing" for users input (string)
+            continue_playing: str = input("Do you want to play 'Chemist's Jumble'? ") #E: Defines a variable "continue_playing" for users input (string)
             while continue_playing == "Y" or continue_playing == "y": #A: while the user's answer is yes/"Y" (they want to continue playing), the game code below will run
                 bottles: list = []  #E: instantiate "bottles" as an empty list
                 number_of_bottles: int = 5 + (level // 5) #A: defines a variable for the number of bottles (int) and is equal to 5 plus integer division of the level number by 5 
@@ -659,7 +671,7 @@ while True:
             :return: None
             """
             print()
-            print("Welcome to 'Famrer Hustle' by 'GlobalCreativeCommunityFounder'.") #A: Prints welcome on the screen
+            print("Welcome to 'Famrer Hustle'.") #A: Prints welcome on the screen
             print("You are farmer. You have a pen of chickens and a cornfield. Recently you discovered that the jealous Farmer Dave, your nemesis, has released your chickens into your cornfield. \nWhen you went to catch them, \
         you spotted a family of foxes attempting to have chicken for lunch. Your job is to separate them all before \
         it's too late.")
@@ -670,7 +682,7 @@ while True:
             print("Enter 'Y' for yes.") # Prints instructions on the screen #V: asks for input
             print("Enter anything else for no and exit the game.")  #A: Prints instructions on the screen
             level: int = 1 #defines variable "level" (int) as initially equal to 1
-            continue_playing: str = input("Do you want to continue playing 'Farmer Hustle'? ") #E: Defines a variable "continue_playing" for users input (string)
+            continue_playing: str = input("Do you want to play 'Farmer Hustle'? ") #E: Defines a variable "continue_playing" for users input (string)
             while continue_playing == "Y" or continue_playing == "y": # while the user's answer is yes/"Y" (they want to continue playing), the game code below will run
                 bottles: list = []  #instantiate "bottles" as an empty list
                 number_of_bottles: int = 5 + (level // 5) #defines a variable for the number of bottles (int) and is equal to 5 plus integer division of the level number by 5 
@@ -699,34 +711,34 @@ while True:
                         clear()
 
                         print("You are now at level " + str(level))
-                        print("Current representation of each bottle is as below.\n") #prints both statements before the game starts
+                        print("Current representation of each barn is as below.\n") #prints both statements before the game starts
                         for bottle in bottles: #for every item (bottle, which contain colors) in list of bottles created above
                             print(str(bottle) + "\n") #actually displays bottles built in Bottle
 
-                        bottle_from_index: int = input("Please enter index of water bottle you want to pour bottle from " # asks user to pick a bottle (take color out of it)
+                        bottle_from_index: int = input("Please enter index of barn you want to move organism from " # asks user to pick a bottle (take color out of it)
                                                         "(1 - " + str(len(bottles)) + "): ") #REMINDER: ADD INTEGER CHECK
                         
-                        bottle_to_index: int = input("Please enter index of water bottle you want to pour bottle to " #asks user for recipient bottle (put color into it)
+                        bottle_to_index: int = input("Please enter index of barn you want to move organism to " #asks user for recipient bottle (put color into it)
                                                         "(1 - " + str(len(bottles)) + "): ")
                         while (is_int(bottle_from_index) == False or is_int(bottle_to_index) == False):
                             print("Invalid input! A different input is expected!") # checks for numerically invalid inputs (not TypeError inputs)
-                            bottle_from_index = input("Please enter index of water bottle you want to pour bottle from "
+                            bottle_from_index = input("Please enter index of barn you want to move organism from "
                                                         "(1 - " + str(len(bottles)) + "): ") #restates request for input (in case previous one was invalid)
-                            bottle_to_index = input("Please enter index of water bottle you want to pour bottle to "
+                            bottle_to_index = input("Please enter index of water bottle you want to move organism to "
                                                         "(1 - " + str(len(bottles)) + "): ")
                         bottle_from_index = int(bottle_from_index)
                         bottle_to_index = int(bottle_to_index)
                         while bottle_from_index < 1 or bottle_from_index > len(bottles) or bottle_to_index < 1 or bottle_to_index > len(bottles) or bottle_from_index == bottle_to_index:
                             print("Invalid input! A different input is expected!") #checks for numerically invalid inputs (not TypeError inputs)
-                            bottle_from_index = input("Please enter index of water bottle you want to pour bottle from "
+                            bottle_from_index = input("Please enter index of barn you want to move organism from "
                                                         "(1 - " + str(len(bottles)) + "): ") #restates request for input (in case previous one was invalid)
-                            bottle_to_index = input("Please enter index of water bottle you want to pour bottle to "
+                            bottle_to_index = input("Please enter index of barn you want to move organism to "
                                                         "(1 - " + str(len(bottles)) + "): ")
                             while (is_int(bottle_from_index) == False or is_int(bottle_to_index) == False):
                                 print("Invalid input! A different input is expected!") #checks for numerically invalid inputs (not TypeError inputs)
-                                bottle_from_index = input("Please enter index of water bottle you want to pour bottle from "
+                                bottle_from_index = input("Please enter index of barn you want to move organism from "
                                                             "(1 - " + str(len(bottles)) + "): ") #restates request for input (in case previous one was invalid)
-                                bottle_to_index = input("Please enter index of water bottle you want to pour bottle to "
+                                bottle_to_index = input("Please enter index of barn you want to move organism to "
                                                             "(1 - " + str(len(bottles)) + "): ")
                             bottle_from_index = int(bottle_from_index)
                             bottle_to_index = int(bottle_to_index)

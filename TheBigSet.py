@@ -1,4 +1,4 @@
-  # Importing necessary libraries: MODIFIED
+   # Importing necessary libraries: MODIFIED
 import copy 
 import sys 
 import os 
@@ -190,11 +190,11 @@ while True:
                     for bottle in bottles: #for every item (bottle, which contain colors) in list of bottles created above
                         print(str(bottle) + "\n") #actually displays bottles built in Bottle
 
-                    bottle_from_index: int = input("Press \"r\" at any time to restart. \nPlease enter index of water bottle you want to pour coloured water from " #A&V: asks user to pick a bottle (take color out of it)
+                    bottle_from_index: int = input("Press \"r\" at any time to restart. \nPlease enter index of water bottle you want to pour coloured water from " #asks user to pick a bottle (take color out of it)
                                                     "(1 - " + str(len(bottles)) + "): ") #REMINDER: ADD INTEGER CHECK
                     if bottle_from_index == "r":
                             break
-                    bottle_to_index: int = input("Please enter index of water bottle you want to pour coloured water to " #A&V: asks user for recipient bottle (put color into it)
+                    bottle_to_index: int = input("Please enter index of water bottle you want to pour coloured water to " #asks user for recipient bottle (put color into it)
                                                     "(1 - " + str(len(bottles)) + "): ")
                     if bottle_to_index == "r":
                             break
@@ -284,7 +284,7 @@ while True:
         # Creating necessary classes
 
 
-        class Bottle: #A: 'Bottle' is the name of the class
+        class Bottle: #'Bottle' is the name of the class
             """
             This class contains attributes of a water bottle.
             """
@@ -314,7 +314,7 @@ while True:
                             res += "|        " + str(curr_water_level) + "         |\n"
                         elif len(str(curr_water_level)) == 5: # for 'NaOCl' and 'Water' and 'MgSO4'
                             res += "|        " + str(curr_water_level) + "        |\n"
-                        elif len(str(curr_water_level)) == 6: # for 'NaOCl' and 'Water' and 'MgSO4'
+                        elif len(str(curr_water_level)) == 6: # for 'NaHCO3' and 'Bleach'and 'Quartz'
                             res += "|       " + str(curr_water_level) + "        |\n"
                         elif len(str(curr_water_level)) == 10: # for 'Table salt' and 'Epsom salt'
                             res += "|     " + str(curr_water_level) + "      |\n"
@@ -347,7 +347,7 @@ while True:
                     return False
                 if len(other_bottle.get_water_levels()) >= self.BOTTLE_CAPACITY: #length of list of compounds in other bottle exceeds or equals Bottle Capacity return False 
                     return False
-                if other_last is None or (self_last in Water.WATER  and  other_last in Water.WATER) or (self_last in Water.TABLE_SALT and other_last in Water.TABLE_SALT) or (self_last in Water.BAKING_SODA and other_last in Water.BAKING_SODA) or (self_last in Water.BLEACH and other_last in Water.BLEACH) or (self_last in Water.EPSOM_SALT and other_last in Water.EPSOM_SALT) or (self_last in Water.QUARTZ and other_last in Water.QUARTZ) or len(other_bottle.__water_levels) == 0: #A&V: If the bottle is empty (written twice) or the top colors of both bottles are the same
+                if other_last is None or (self_last in Water.WATER  and  other_last in Water.WATER) or (self_last in Water.TABLE_SALT and other_last in Water.TABLE_SALT) or (self_last in Water.BAKING_SODA and other_last in Water.BAKING_SODA) or (self_last in Water.BLEACH and other_last in Water.BLEACH) or (self_last in Water.EPSOM_SALT and other_last in Water.EPSOM_SALT) or (self_last in Water.QUARTZ and other_last in Water.QUARTZ) or len(other_bottle.__water_levels) == 0: #If the bottle is empty (written twice) or the top colors of both bottles are the same
                     self.__water_levels.remove(self_last) #Removes the last item (top compound) from the list of the current bottle
                     other_bottle.add_water_level(self_last) #Adds the last item (top compound) from the list of the current bottle to the end of the other bottle list (top of bottle)
                     return True 
@@ -392,12 +392,12 @@ while True:
             """
             This class contains attributes of water
             """
-            WATER = ["H2O", "Dihydrogen monoxide", "Water"]
+            WATER = ["H\N{SUBSCRIPT TWO}O", "Dihydrogen monoxide", "Water"] #added subscript for H2O
             TABLE_SALT = ["NaCl", "Sodium chloride", "Table salt"]
-            BAKING_SODA = ["NaHCO3", "Sodium bicarbonate", "Baking soda"]
+            BAKING_SODA = ["NaHCO\N{SUBSCRIPT THREE}", "Sodium bicarbonate", "Baking soda"] #added subscript for NAHCO3
             BLEACH = ["NaOCl", "Sodium hypochlorite", "Bleach"]
-            EPSOM_SALT = ["MgSO4", "Magnesium sulfate", "Epsom salt"]
-            QUARTZ = ["SiO2","Silicon dioxide","Quartz"]
+            EPSOM_SALT = ["MgSO\N{SUBSCRIPT FOUR}", "Magnesium sulfate", "Epsom salt"]#added subscript for MgSO4
+            QUARTZ = ["SiO\N{SUBSCRIPT TWO}","Silicon dioxide","Quartz"] #added subscript for SiO2
 
             POSSIBLE_COLOURS: list = [WATER, TABLE_SALT, BAKING_SODA, BLEACH, EPSOM_SALT, QUARTZ] #constant list
 
@@ -686,7 +686,7 @@ while True:
                 for i in range(number_of_empty_bottles): #loop will run for every empty bottle. 1 empty bottle -> range = [0]
                     bottles.append(Bottle([])) #creating empty bottles/empty lists (level 1 will have 1 empty bottle)
 
-                for i in range(number_of_bottles - number_of_empty_bottles): #V: loop will run for every filled bottle
+                for i in range(number_of_bottles - number_of_empty_bottles): #loop will run for every filled bottle
                     water_levels: list = []  #defines a empty list "water_levels"
                     for j in range(4):
                         water_levels.append(Water(possible_colours[random.randint(0, len(possible_colours) - 1)])) #generates a random integer to be used as the index for the constant list of possible foxes/plants/chickens defined in Water then appends that entry (foxes/plants/chickens) to the list water_levels

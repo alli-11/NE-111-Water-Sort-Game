@@ -10,7 +10,7 @@ while True:
     print("Welcome to Sorting Game created by GlobalCreativeCommunityFounder and edited by: Alli Miles, Fatima Varela Varela, Victoria Cella Xia and Esha Saleem")
     user_input = input("Please press 1 to play WaterSortPuzzle, press 2 to play Chemist's Jumble, press 3 to play Farmer's Hustle and press 4 to exit: ")
 
-    if user_input == "1":
+    if user_input == "1": #Water Sort
         # Creating necessary functions to be used throughout the game.
 
         def is_int(possible) :
@@ -190,8 +190,9 @@ while True:
                     for bottle in bottles: #for every item (bottle, which contain colors) in list of bottles created above
                         print(str(bottle) + "\n") #actually displays bottles built in Bottle
 
+                    b = 0
                     bottle_from_index: int = input("Press \"r\" at any time to restart. \nPlease enter index of water bottle you want to pour coloured water from " #asks user to pick a bottle (take color out of it)
-                                                    "(1 - " + str(len(bottles)) + "): ") #REMINDER: ADD INTEGER CHECK
+                                                    "(1 - " + str(len(bottles)) + "): ") 
                     if bottle_from_index == "r":
                             break
                     bottle_to_index: int = input("Please enter index of water bottle you want to pour coloured water to " #asks user for recipient bottle (put color into it)
@@ -203,11 +204,15 @@ while True:
                         bottle_from_index = input("Press \"r\" at any time to restart. \nPlease enter index of water bottle you want to pour coloured water from "
                                                     "(1 - " + str(len(bottles)) + "): ") 
                         if bottle_from_index == "r":
+                            b = 1
                             break
                         bottle_to_index = input("Please enter index of water bottle you want to pour coloured water to "
                                                     "(1 - " + str(len(bottles)) + "): ")
                         if bottle_to_index == "r":
+                            b = 1
                             break
+                    if b == 1:
+                        break
                     bottle_from_index = int(bottle_from_index)
                     bottle_to_index = int(bottle_to_index)
                     while bottle_from_index < 1 or bottle_from_index > len(bottles) or bottle_to_index < 1 or bottle_to_index > len(bottles) or bottle_from_index == bottle_to_index:
@@ -215,23 +220,31 @@ while True:
                         bottle_from_index = input("Press \"r\" at any time to restart. \nPlease enter index of water bottle you want to pour coloured water from "
                                                     "(1 - " + str(len(bottles)) + "): ") 
                         if bottle_from_index == "r":
+                            b = 1
                             break
                         bottle_to_index = input("Please enter index of water bottle you want to pour coloured water to "
                                                     "(1 - " + str(len(bottles)) + "): ")
                         if bottle_to_index == "r":
+                            b = 1
                             break
                         while (is_int(bottle_from_index) == False or is_int(bottle_to_index) == False):
                             print("Invalid input! A different input is expected!") #checks for numerically invalid inputs (not TypeError inputs)
                             bottle_from_index = input("Press \"r\" at any time to restart. \nPlease enter index of water bottle you want to pour coloured water from "
                                                         "(1 - " + str(len(bottles)) + "): ")
                             if bottle_from_index == "r":
+                                b = 1
                                 break
                             bottle_to_index = input("Please enter index of water bottle you want to pour coloured water to "
                                                         "(1 - " + str(len(bottles)) + "): ")
                             if bottle_to_index == "r":
+                                b = 1
                                 break
+                        if b == 1:
+                            break
                         bottle_from_index = int(bottle_from_index)
                         bottle_to_index = int(bottle_to_index)
+                    if b == 1:
+                        break
 
                         
                     bottle_from: Bottle = bottles[bottle_from_index - 1] # new variable refering to class Bottle --> picks bottle (from bottles) chosen by user with corresponding index 
@@ -251,7 +264,7 @@ while True:
         if __name__ == '__main__': 
             main()
 
-    elif user_input == "2":
+    elif user_input == "2": #Chemist's Jumble
         # Creating necessary functions to be used throughout the game.
 
         def is_int(possible) :
@@ -460,6 +473,7 @@ while True:
                     for bottle in bottles: #for every item (bottle, which contain compound) in list of bottles created above
                         print(str(bottle) + "\n") 
 
+                    b = 0    
                     bottle_from_index: int = input("Please enter index of beaker you want to pour chemical compound from " #asks user to pick a bottle (take color out of it)
                                                     "(1 - " + str(len(bottles)) + "): ")
                     if bottle_from_index == "r":
@@ -473,11 +487,15 @@ while True:
                         bottle_from_index = input("Please enter index of beaker you want to pour chemical compound from "
                                                     "(1 - " + str(len(bottles)) + "): ") #restates request for input (in case previous one was invalid)
                         if bottle_from_index == "r":
+                            b = 1
                             break
                         bottle_to_index = input("Please enter index of beaker you want to pour chemical compound to "
                                                     "(1 - " + str(len(bottles)) + "): ")
                         if bottle_to_index == "r":
+                            b = 1
                             break
+                    if b == 1:
+                        break
                     bottle_from_index = int(bottle_from_index)
                     bottle_to_index = int(bottle_to_index)
                     while bottle_from_index < 1 or bottle_from_index > len(bottles) or bottle_to_index < 1 or bottle_to_index > len(bottles) or bottle_from_index == bottle_to_index:
@@ -485,24 +503,31 @@ while True:
                         bottle_from_index = input("Please enter index of beaker you want to pour chemical compound from "
                                                     "(1 - " + str(len(bottles)) + "): ") #restates request for input (in case previous one was invalid)
                         if bottle_from_index == "r":
+                            b = 1
                             break
                         bottle_to_index = input("Please enter index of beaker you want to pour chemical compound to "
                                                     "(1 - " + str(len(bottles)) + "): ")
                         if bottle_to_index == "r":
+                            b = 1
                             break
                         while (is_int(bottle_from_index) == False or is_int(bottle_to_index) == False):
                             print("Invalid input! A different input is expected!") #checks for numerically invalid inputs (not TypeError inputs)
                             bottle_from_index = input("Please enter index of beaker you want to pour chemical compound from "
                                                         "(1 - " + str(len(bottles)) + "): ") #restates request for input (in case previous one was invalid)
                             if bottle_from_index == "r":
+                                b = 1
                                 break
                             bottle_to_index = input("Please enter index of beaker you want to pour chemical compound to "
                                                         "(1 - " + str(len(bottles)) + "): ")
                             if bottle_to_index == "r":
+                                b = 1
                                 break
+                        if b == 1:
+                            break
                         bottle_from_index = int(bottle_from_index)
                         bottle_to_index = int(bottle_to_index)
-                    
+                    if b == 1:
+                        break
                     
                         
                     bottle_from: Bottle = bottles[bottle_from_index - 1] #new variable refering to class Bottle --> picks bottle (from bottles) chosen by user with corresponding index 
@@ -522,7 +547,7 @@ while True:
         if __name__ == '__main__': #run only as script
             main()
 
-    elif user_input == "3":
+    elif user_input == "3": #Farmer's Hustle
             # Creating necessary functions to be used throughout the game.
 
         def is_int(possible) :

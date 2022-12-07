@@ -440,7 +440,7 @@ while True:
             """
             
             print()
-            print("Welcome to Chemist's Jumble.") 
+            print("Welcome to Chemist's Jumble. You are a chemist and you enter your stockroom to find it in chaos. Dave, the mad scientist has mixed many of your compounds. You must sort them, or else who knows what could happen during your next experiment...") 
             print("In this game, you are required to make sure that each beaker only contains one type of chemical compound.") 
             print()
             print("Enter 'Y' for yes.") 

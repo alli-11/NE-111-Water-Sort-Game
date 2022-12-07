@@ -254,7 +254,7 @@ while True:
                 if all_bottles_sorted(bottles):
                     for bottle in bottles: # for every item (bottle, which contain colors) in list of bottles created above
                         print(str(bottle) + "\n") #actually displays bottles built in Bottle
-                    print ("Congratulations! The coloured water is sorted:(")
+                    print ("Congratulations! The coloured water is sorted")
                     level += 1
                     print("Enter 'Y' for yes.") 
                     print("Enter anything else to return to game selection.")

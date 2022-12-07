@@ -688,9 +688,7 @@ while True:
             """
             print()
             print("Welcome to 'Farmer's Hustle'.")
-            print("You are farmer. You have a pen of chickens and a corn field. Recently you discovered that the jealous Farmer Dave, your nemesis, has released your chickens into your cornfield. \nWhen you went to catch them, \
-        you spotted a family of foxes attempting to have chicken for lunch. Your job is to separate them all before \
-        it's too late.")
+            print("You are farmer. You have a pen of chickens and a corn field. Recently you discovered that the jealous Farmer Dave, your nemesis, has released your chickens into your cornfield. \nWhen you went to catch them, you spotted a family of foxes attempting to have chicken for lunch. Your job is to separate them all before it's too late.")
             print ("---------")
             print ("Once you start (enter \"Y\"), you have 60 seconds to complete your task before all is lost.")
             print("Once 60 seconds are up, you can finish your move before the chickens claim your corn and the foxes devour you chickens.")
